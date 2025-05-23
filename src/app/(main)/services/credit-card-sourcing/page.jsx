@@ -78,7 +78,7 @@ const CreditCardSourcing = async () => {
           <div className="md:col-span-2">
             <div className="rounded-xl overflow-hidden mb-6">
               <Image
-                src="/credit-card-sourcing-banner.jpg"
+                src="/service/credit-card-outsourching.jpg"
                 alt="Credit Card Sourcing"
                 width={800}
                 height={400}

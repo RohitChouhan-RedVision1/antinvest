@@ -2,9 +2,10 @@ import { NextResponse } from 'next/server';
 import BlogsModel from '@/lib/models/BlogModel';
 import { ConnectDB } from '@/lib/db/ConnectDB';
 import cloudinary from '@/lib/cloudinary';
-import { slugify } from '@/lib/slugify';
+
 import path from 'path';
 import fs from 'fs';
+import { slugify } from '@/lib/functions';
  
  
 export async function DELETE(req, { params }) {

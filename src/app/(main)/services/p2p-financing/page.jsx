@@ -82,7 +82,7 @@ const P2PFinancing = async () => {
           <div className="md:col-span-2">
             <div className="rounded-xl overflow-hidden mb-6">
               <Image
-                src="/p2p-financing-banner.jpg"
+                src="/service/p2p-investing.jpg"
                 alt="P2P Financing"
                 width={800}
                 height={400}

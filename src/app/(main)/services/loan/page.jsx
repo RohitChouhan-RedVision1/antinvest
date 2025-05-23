@@ -78,7 +78,7 @@ const LoanSourcing = async () => {
           <div className="md:col-span-2">
             <div className="rounded-xl overflow-hidden mb-6">
               <Image
-                src="/loan-sourcing-banner.jpg"
+                src="/service/loan.jpg"
                 alt="Loan Sourcing"
                 width={800}
                 height={400}
