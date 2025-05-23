@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import styles from './WhyChooseUs.module.css'
 import { CircleArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 
 const WhyChooseUs = () => {
     const data = [
@@ -44,12 +45,15 @@ const WhyChooseUs = () => {
                                     </div>
                                 ))}
                             </div>
-                            <div className={`${styles.whyChooseList}`} data-aos="fade-up" data-aos-anchor-placement="bottom" >
+                            <Link href="/contact-us">
+                                            <button className="secondarybutton">Get Start</button>
+                                          </Link>
+                            {/* <div className={`${styles.whyChooseList}`} data-aos="fade-up" data-aos-anchor-placement="bottom" >
                                 <ul>
                                     <li className='flex items-center justify-center gap-x-3'><span><CircleArrowLeft color='var(--rv-secondary)' /></span> Strategic Financial Planning</li>
                                     <li className='flex items-center justify-center gap-x-3'><span><CircleArrowLeft color='var(--rv-secondary)'/></span> Expert Investment Advisory</li>
                                 </ul>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 

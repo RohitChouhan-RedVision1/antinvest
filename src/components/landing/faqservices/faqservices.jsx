@@ -83,32 +83,32 @@ export function FAQServices() {
         <h2 className="text-3xl font-bold  mb-4">
     Frequently Asked Questions
   </h2>
-      {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              className="mb-2 border border-white rounded-2xl overflow-hidden"
-              variants={childFade}
-            >
-              <button
-                className="items-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none hover:text-[var(--rv-primary)] focus-visible:ring-1 text-white focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 text-primary-foreground shadow w-full flex justify-between text-left whitespace-normal p-5 bg-[var(--rv-secondary)]"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              >
-                <span className="text-[16px] md:text-lg font-bold text-white text-left break-words hover:text-[var(--rv-primary)]">
-                  {faq.question}
-                </span>
-                {openIndex === index ? (
-                  <MinusIcon className="w-5 h-5  " />
-                ) : (
-                  <PlusIcon className="w-5 h-5 " />
-                )}
-              </button>
-              {openIndex === index && (
-                <div className="p-4 bg-[var(--rv-secondary)] text-white border-t">
-                  {faq.answer}
-                </div>
-              )}
-            </motion.div>
-          ))}
+            {faqs.map((faq, index) => (
+        <motion.div
+          key={index}
+          className="mb-2 border border-white rounded-2xl overflow-hidden text-white group hover:text-[var(--rv-primary)]"
+          variants={childFade}
+        >
+          <button
+            className="items-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 text-primary-foreground shadow w-full flex justify-between text-left whitespace-normal p-5 bg-[var(--rv-secondary)] group-hover:text-[var(--rv-primary)]"
+            onClick={() => setOpenIndex(openIndex === index ? null : index)}
+          >
+            <span className="text-[16px] md:text-lg font-bold text-left break-words transition-colors group-hover:text-[var(--rv-primary)]">
+              {faq.question}
+            </span>
+            {openIndex === index ? (
+              <MinusIcon className="w-5 h-5 transition-colors group-hover:text-[var(--rv-primary)]" />
+            ) : (
+              <PlusIcon className="w-5 h-5 transition-colors group-hover:text-[var(--rv-primary)]" />
+            )}
+          </button>
+          {openIndex === index && (
+            <div className="p-4 bg-[var(--rv-secondary)] text-white border-t">
+              {faq.answer}
+            </div>
+          )}
+        </motion.div>
+      ))}
     </section>
   );
 }

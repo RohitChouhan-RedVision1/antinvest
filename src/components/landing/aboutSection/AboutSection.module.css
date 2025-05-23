@@ -1,6 +1,8 @@
 .aboutUs {
     /* padding: 60px 20px; */
     background-color: #f9f9f9;
+    position: relative;
+    z-index: 5;
 }
 
 /* .container {

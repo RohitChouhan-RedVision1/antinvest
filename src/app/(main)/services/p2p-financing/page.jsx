@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import { getServiceData, getSiteData } from "@/lib/functions";
 import { FAQServices } from "@/components/landing/faqservices/faqservices";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 export const metadata = {
   title: "P2P Financing",
@@ -29,19 +30,30 @@ const P2PFinancing = async () => {
       </div>
 
       <div className="max-w-screen-xl mx-auto main_section">
-        <div className="py-10 grid md:grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-3 gap-10">
 
           {/* Left Sticky Sidebar */}
           <div className="space-y-6 md:sticky top-24 self-start h-fit">
+            {/* Services List */}
             <div className="bg-white rounded-xl shadow p-6">
-              <h3 className="text-xl font-semibold text-[--rv-primary] mb-4">Our Services</h3>
+              <h3 className="text-xl font-semibold text-[--rv-primary] mb-4">
+                Our Service
+              </h3>
               <ul className="space-y-3">
                 {services.map((service, i) => (
-                  <li key={i} className="flex justify-between items-center border-b hover:text-[--rv-primary] pb-2">
-                    <Link href={`/${service.link}`} className="flex-1 transition-colors duration-300">
+                  <li
+                    key={i}
+                    className="flex justify-between items-center border-b pb-2 hover:text-[--rv-primary] group"
+                  >
+                    <Link
+                      href={`/services/${service.link}`}
+                      className="flex-1 transition-colors duration-300"
+                    >
                       + {service.name}
                     </Link>
-                    <span>→</span>
+                    <span className="text-xl -rotate-45 transition-transform duration-300 group-hover:rotate-0">
+                      →
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -55,23 +67,35 @@ const P2PFinancing = async () => {
                 <h4 className="text-2xl font-bold text-[--rv-primary] mb-4 text-center">
                   Stay Connected with Us!
                 </h4>
+
                 <div className="space-y-4 text-sm">
                   <div className="flex items-start gap-3">
-                    <FaPhone className="text-xl text-[--rv-primary]" />
-                    <span>{sitedata.mobile}</span>
+                    <div className="min-w-[24px] h-[24px] flex items-center justify-center text-[--rv-primary]">
+                      <FaPhone className="text-xl" />
+                    </div>
+                    <span className="flex-1">{sitedata.mobile}</span>
                   </div>
+
                   <div className="flex items-start gap-3">
-                    <FaEnvelope className="text-xl text-[--rv-primary]" />
-                    <span>{sitedata.email}</span>
+                    <div className="min-w-[24px] h-[24px] flex items-center justify-center text-[--rv-primary]">
+                      <FaEnvelope className="text-xl" />
+                    </div>
+                    <span className="flex-1 break-all">{sitedata.email}</span>
                   </div>
+
                   <div className="flex items-start gap-3">
-                    <FaMapLocation className="text-xl text-[--rv-primary]" />
-                    <span>{sitedata.address}</span>
+                    <div className="min-w-[24px] h-[24px] flex items-center justify-center text-[--rv-primary] mt-1">
+                      <FaMapLocation className="text-xl" />
+                    </div>
+                    <span className="flex-1">{sitedata.address}</span>
                   </div>
                 </div>
+
                 <div className="mt-6">
                   <Link href="/contact-us">
-                    <button className="primarybutton px-6 py-2 rounded-md text-sm">Get In Touch</button>
+                    <button className="primarybutton px-6 py-2 rounded-md text-sm">
+                      Get In Touch
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -104,22 +128,22 @@ const P2PFinancing = async () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 mb-4">
               <div className="flex items-center gap-2 text-sm font-medium text-[var(--rv-secondary)]">
-                ✅ Direct Lender-to-Borrower Model
+                <IoMdCheckmarkCircleOutline className="text-2xl text-green-600"/> Direct Lender-to-Borrower Model
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-[var(--rv-secondary)]">
-                ✅ Higher Returns for Lenders
+                <IoMdCheckmarkCircleOutline className="text-2xl text-green-600"/> Higher Returns for Lenders
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-[var(--rv-secondary)]">
-                ✅ Flexible Loan Terms
+                <IoMdCheckmarkCircleOutline className="text-2xl text-green-600"/> Flexible Loan Terms
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-[var(--rv-secondary)]">
-                ✅ Quick Online Processing
+                <IoMdCheckmarkCircleOutline className="text-2xl text-green-600"/> Quick Online Processing
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-[var(--rv-secondary)]">
-                ✅ Transparent & Secure Transactions
+                <IoMdCheckmarkCircleOutline className="text-2xl text-green-600"/> Transparent & Secure Transactions
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-[var(--rv-secondary)]">
-                ✅ Ideal for Personal & Business Needs
+                <IoMdCheckmarkCircleOutline className="text-2xl text-green-600"/> Ideal for Personal & Business Needs
               </div>
             </div>
 

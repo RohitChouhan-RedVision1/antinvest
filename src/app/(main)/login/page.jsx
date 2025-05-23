@@ -73,7 +73,16 @@ const LoginPage = () => {
   };
 
   return (
+    <div className="">
+      <div className="flex bg-center bg-no-repeat bg-cover bg-[url('/images/pay-premium/pay-premium.webp')] overflow-hidden text-start justify-start items-center h-64">
+        <div className="max-w-screen-xl mx-auto">
+          <h1 className="text-gray-900 text-3xl md:text-5xl font-bold">
+            Login
+          </h1>
+        </div>
+      </div>
     <div className="main_section">
+      
       <div className="max-w-screen-xl min-h-[500px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#E7EBEF] rounded-2xl shadow-lg overflow-hidden">
         {/* Left Section */}
         <div className="flex flex-col md:px-10">
@@ -148,6 +157,7 @@ const LoginPage = () => {
         onClose={() => setShowForgotModal(false)}
         logintype={selectedRole === "ADMIN" ? "ADVISOR" : selectedRole}
       />
+    </div>
     </div>
   );
 };

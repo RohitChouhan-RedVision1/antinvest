@@ -82,17 +82,16 @@ export function FAQ() {
     <section className="bg-[var(--rv-secondary)] main_section text-center items-center overflow-hidden">
       <div className="mx-auto  max-w-screen-xl px-2 lg:px-0">
         <div className="section-title dark-section">
-                            <h3 className="wow fadeInUp">Our Feature</h3>
-                            <h2 className="text-anime-style-2" data-cursor="-opaque">
-                                Key features of our finance <span>and consulting</span>
-                            </h2>
-                            <p data-aos="fade-up" data-aos-anchor-placement="bottom">
-              Discover a range of services designed to support your financial
-              journey — from investments to loans, credit sourcing, and more.
-              Our expert guidance ensures you make informed and confident
-              financial decisions.
-            </p>
-                        </div>
+  <h3 className="wow fadeInUp">FAQ</h3>
+  <h2 className="text-anime-style-2" data-cursor="-opaque">
+    Frequently Asked <span>Questions</span>
+  </h2>
+  <p data-aos="fade-up" data-aos-anchor-placement="bottom">
+    Get quick answers to common queries about our financial services. Whether you're exploring
+    investment options or need clarity on credit and consulting solutions, our FAQs are here to help.
+  </p>
+</div>
+
       <div className=" text-left flex flex-col lg:flex-row items-center gap-6 mt-10 px-3 md:px-5 lg:px-10">
         {/* Left Image Section */}
         <motion.div
@@ -119,31 +118,32 @@ export function FAQ() {
           viewport={{ once: true }}
         >
           {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              className="mb-2 border border-white rounded-2xl overflow-hidden"
-              variants={childFade}
-            >
-              <button
-                className="items-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none hover:text-[var(--rv-primary)] focus-visible:ring-1 text-white focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 text-primary-foreground shadow w-full flex justify-between text-left whitespace-normal p-5 bg-[var(--rv-secondary)]"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              >
-                <span className="text-[16px] md:text-lg font-bold text-white text-left break-words hover:text-[var(--rv-primary)]">
-                  {faq.question}
-                </span>
-                {openIndex === index ? (
-                  <MinusIcon className="w-5 h-5  " />
-                ) : (
-                  <PlusIcon className="w-5 h-5 " />
-                )}
-              </button>
-              {openIndex === index && (
-                <div className="p-4 bg-[var(--rv-secondary)] text-white border-t">
-                  {faq.answer}
-                </div>
-              )}
-            </motion.div>
-          ))}
+  <motion.div
+    key={index}
+    className="mb-2 border border-white rounded-2xl overflow-hidden text-white group hover:text-[var(--rv-primary)]"
+    variants={childFade}
+  >
+    <button
+      className="items-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 text-primary-foreground shadow w-full flex justify-between text-left whitespace-normal p-5 bg-[var(--rv-secondary)] group-hover:text-[var(--rv-primary)]"
+      onClick={() => setOpenIndex(openIndex === index ? null : index)}
+    >
+      <span className="text-[16px] md:text-lg font-bold text-left break-words transition-colors group-hover:text-[var(--rv-primary)]">
+        {faq.question}
+      </span>
+      {openIndex === index ? (
+        <MinusIcon className="w-5 h-5 transition-colors group-hover:text-[var(--rv-primary)]" />
+      ) : (
+        <PlusIcon className="w-5 h-5 transition-colors group-hover:text-[var(--rv-primary)]" />
+      )}
+    </button>
+    {openIndex === index && (
+      <div className="p-4 bg-[var(--rv-secondary)] text-white border-t">
+        {faq.answer}
+      </div>
+    )}
+  </motion.div>
+))}
+
         </motion.div>
       </div>
       </div>

@@ -61,11 +61,11 @@ export default function Page() {
         <div className="max-w-screen-xl mx-auto py-[30px] lg:py-[60px]">
             <div className="">
             <div className="mb-5 flex flex-col md:flex-row gap-5 justify-between">
-            <h1 className="text-2xl md:text-3xl font-bold uppercase">
+            <h3 className="text-2xl md:text-3xl font-bold uppercase">
                                 SWP Calculator
-                            </h1>
+                            </h3>
                                         <div className="flex justify-between gap-4">
-                                            <h2>Explore other calculators</h2>
+                                            <span>Explore other calculators</span>
                                             <select
                                                 className="w-full border border-gray-500 rounded-lg p-2"
                                                 onChange={handleCalculatorChange}
@@ -93,7 +93,7 @@ export default function Page() {
                                 <div className="input-fields mt-5 mb-10">
                                     <div className='items-center mt-5'>
                                         <div className='flex justify-between'>
-                                            <h1>Lumpsum Invested Amount</h1>
+                                            <h3>Lumpsum Invested Amount</h3>
                                             <div>
                                                 <span className='font-semibold text-green-700'>₹</span>
                                                 <input
@@ -105,18 +105,22 @@ export default function Page() {
                                             </div>
                                         </div>
                                         <Input
-                                            type="range"
-                                            min="10000"
-                                            max="10000000"
-                                            step="500"
-                                            value={investedAmount}
-                                            onChange={(e) => setInvestedAmount(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+  type="range"
+  min="10000"
+  max="10000000"
+  step="500"
+  value={investedAmount}
+  onChange={(e) => setInvestedAmount(parseFloat(e.target.value))}
+  className="customRange w-full"
+  style={{
+    '--progress': `${((investedAmount - 10000) / (10000000 - 10000)) * 100}%`
+  }}
+/>
+
                                     </div>
                                     <div className='items-center mt-5'>
                                         <div className='flex justify-between mt-5'>
-                                            <h1>SWP Withdrawal Amount</h1>
+                                            <h3>SWP Withdrawal Amount</h3>
                                             <div>
                                                 <span className='font-semibold text-green-700'>₹</span>
                                                 <input
@@ -128,18 +132,22 @@ export default function Page() {
                                             </div>
                                         </div>
                                         <Input
-                                            type="range"
-                                            min="500"
-                                            max="1000000"
-                                            step="500"
-                                            value={withdrawalAmount}
-                                            onChange={(e) => setWithdrawalAmount(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+  type="range"
+  min="500"
+  max="1000000"
+  step="500"
+  value={withdrawalAmount}
+  onChange={(e) => setWithdrawalAmount(parseFloat(e.target.value))}
+  className="customRange w-full"
+  style={{
+    '--progress': `${((withdrawalAmount - 500) / (1000000 - 500)) * 100}%`
+  }}
+/>
+
                                     </div>
                                     <div className='items-center mt-5'>
                                         <div className='flex justify-between mt-5'>
-                                            <h1>For a period of (years)</h1>
+                                            <h3>For a period of (years)</h3>
                                             <input
                                                 type="text"
                                                 value={transferPeriod}
@@ -147,19 +155,23 @@ export default function Page() {
                                                 className="font-semibold text-green-700 w-10 border-none"
                                             />
                                         </div>
-                                        <Input
-                                            type="range"
-                                            min="1"
-                                            max="30"
-                                            step="1"
-                                            value={transferPeriod}
-                                            onChange={(e) => setTransferPeriod(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+                                       <Input
+  type="range"
+  min="1"
+  max="30"
+  step="1"
+  value={transferPeriod}
+  onChange={(e) => setTransferPeriod(parseFloat(e.target.value))}
+  className="customRange w-full text-gray-400"
+  style={{
+    '--progress': `${((transferPeriod - 1) / (30 - 1)) * 100}%`
+  }}
+/>
+
                                     </div>
                                     <div className='items-center mt-5'>
                                         <div className='flex justify-between mt-5'>
-                                            <h1>Expected Rate of Return (%)</h1>
+                                            <h3>Expected Rate of Return (%)</h3>
                                             <input
                                                 type="text"
                                                 value={expectedReturnSource}
@@ -168,14 +180,18 @@ export default function Page() {
                                             />
                                         </div>
                                         <Input
-                                            type="range"
-                                            min="1"
-                                            max="30"
-                                            step="1"
-                                            value={expectedReturnSource}
-                                            onChange={(e) => setExpectedReturnSource(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+  type="range"
+  min="1"
+  max="30"
+  step="1"
+  value={expectedReturnSource}
+  onChange={(e) => setExpectedReturnSource(parseFloat(e.target.value))}
+  className="customRange w-full text-gray-400"
+  style={{
+    '--progress': `${((expectedReturnSource - 1) / (30 - 1)) * 100}%`
+  }}
+/>
+
                                     </div>
                                 </div>
 

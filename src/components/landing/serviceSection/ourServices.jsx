@@ -63,7 +63,7 @@ const OurServices = ({ services }) => {
                     </div>
                     <div className={styles.contentArea}>
                       <div className={styles.icons}>
-                        <img src="/icons/service1.svg" alt="" />
+                        <img src="/favicon.ico" alt="" />
                       </div>
                       <div class="space24"></div>
                       <h3>{service?.name}</h3>

@@ -177,8 +177,8 @@
 
 .serviceSectionArea .serviceSingleSlider .serviceBoxarea .contentArea .icons img {
     transition: all 0.4s;
-    height: 40px;
-    width: 40px;
+    height: 60px;
+    width: 60px;
     display: inline-block;
 }
 

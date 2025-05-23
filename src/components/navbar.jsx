@@ -116,16 +116,16 @@ export function Navbar({ services }) {
       .replace(/--+/g, "-")
       .replace(/^-+|-+$/g, "");
 
-    // setSearchQuery("");
-    // setSearchResults([]);
-    // setIsSearchOpen(false);
+    setSearchQuery("");
+    setSearchResults([]);
+    setIsSearchOpen(false);
     // const url = `/performance/single-fund/${slug}?pcode=${items.pcode}&apikey=${process.env.NEXT_PUBLIC_API_KEY}`;
   window.location.href = "/performance/single-fund";
 
   };
   return (
     <div
-      className={`top-0 z-10  transition-all duration-300 ${
+      className={`top-0 z-20  transition-all duration-300 ${
         isSticky ? "sticky bg-white py-1" : "relative bg-white"
       }`}
     >

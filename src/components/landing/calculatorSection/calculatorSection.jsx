@@ -347,7 +347,12 @@ export default function Calculator({ siteData }) {
                         onChange={(e) =>
                           setMonthlyInvestment(parseFloat(e.target.value))
                         }
-                        className={`customRange w-full text-gray-100`}
+                        style={{
+                          "--progress":
+                            ((monthlyInvestment - 500) / (50000 - 500)) * 100 +
+                            "%",
+                        }}
+                        className="customRange"
                         aria-label="Monthly Investment Slider"
                       />
                     </div>
@@ -379,7 +384,12 @@ export default function Calculator({ siteData }) {
                         onChange={(e) =>
                           setOneTimeInvestment(parseFloat(e.target.value))
                         }
-                        className="w-full text-gray-400"
+                        style={{
+                          "--progress":
+                            ((oneTimeInvestment - 500) / (50000 - 500)) * 100 +
+                            "%",
+                        }}
+                        className="customRange"
                       />
                     </div>
                   )}
@@ -409,8 +419,12 @@ export default function Calculator({ siteData }) {
                       max="40"
                       step="1"
                       value={investmentDuration}
-                      onChange={(e) => setDuration(e.target.value)} // Update duration
-                      className="w-full text-gray-400"
+                      onChange={(e) => setDuration(Number(e.target.value))}
+                      style={{
+                        "--progress":
+                          ((investmentDuration - 1) / (40 - 1)) * 100 + "%",
+                      }}
+                      className="customRange"
                     />
                   </div>
                   <div className="items-center mt-5">
@@ -437,8 +451,14 @@ export default function Calculator({ siteData }) {
                       max="30"
                       step="1"
                       value={expectedReturn}
-                      onChange={(e) => setExpectedReturn(e.target.value)} // Update duration
-                      className="w-full text-gray-400"
+                      onChange={(e) =>
+                        setExpectedReturn(Number(e.target.value))
+                      }
+                      style={{
+                        "--progress":
+                          ((expectedReturn - 1) / (30 - 1)) * 100 + "%",
+                      }}
+                      className="customRange w-full"
                     />
                   </div>
                 </div>
@@ -613,18 +633,18 @@ export default function Calculator({ siteData }) {
                 {result && (
                   <div className="mt-4 px-12">
                     <div className="mb-2 text-left flex items-center justify-start gap-3">
-                      <p className="text-white text-2xl">
+                      <p className="text-white text-xl">
                         Your Invested Amount will be{" "}
                       </p>{" "}
-                      <p className="text-2xl font-extrabold text-[var(--rv-primary)]">
+                      <p className="text-2xl font-extrabold text-white">
                         ₹{result?.totalInvestment?.toLocaleString()}
                       </p>
                     </div>
                     <div className="mb-5 text-left flex items-center justify-start gap-3">
-                      <p className="text-white text-2xl">
+                      <p className="text-white text-xl">
                         Your Estimated Return will be{" "}
                       </p>
-                      <p className="text-2xl font-extrabold text-[var(--rv-primary)]">
+                      <p className="text-2xl font-extrabold text-white">
                         ₹
                         {Math.floor(
                           result.futureValue - result.totalInvestment
@@ -632,10 +652,10 @@ export default function Calculator({ siteData }) {
                       </p>
                     </div>
                     <div className="mb-5 text-left flex items-center justify-start gap-3">
-                      <p className="text-white text-2xl mb-1">
+                      <p className="text-white text-xl mb-1">
                         You would have earned
                       </p>
-                      <p className="text-2xl font-extrabold text-[var(--rv-primary)]">
+                      <p className="text-2xl font-extrabold text-white">
                         ₹{result?.futureValue?.toLocaleString()}
                       </p>
                     </div>

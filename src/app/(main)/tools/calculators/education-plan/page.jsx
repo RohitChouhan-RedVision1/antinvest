@@ -66,12 +66,12 @@ export default function EducationPlanningCalculator() {
         <div className="">
             <div className="mb-5 flex flex-col md:flex-row gap-5 justify-between">
             <div className="">
-                        <h1 className="text-2xl md:text-3xl font-bold uppercase">
+                        <h3 className="text-2xl md:text-3xl font-bold uppercase">
                             Education Planning Calculator
-                        </h1>
+                        </h3>
                     </div>
                 <div className="flex justify-between gap-4">
-                    <h2>Explore other calculators</h2>
+                    <span>Explore other calculators</span>
                     <select
                         className="w-full border border-gray-500 rounded-lg p-2"
                         onChange={handleCalculatorChange}
@@ -98,7 +98,7 @@ export default function EducationPlanningCalculator() {
                                     {/* Current Age */}
                                     <div className='items-center mt-5 mb-5'>
                                         <div className='flex justify-between'>
-                                            <h1>Current Age</h1>
+                                            <h3>Current Age</h3>
                                             <input
                                                 type="text"
                                                 value={currentAge}
@@ -106,20 +106,24 @@ export default function EducationPlanningCalculator() {
                                                 className="font-semibold text-green-700 w-10 border-none"
                                             />
                                         </div>
-                                        <Input
-                                            type="range"
-                                            min="1"
-                                            max="30"
-                                            step="1"
-                                            value={currentAge}
-                                            onChange={(e) => setCurrentAge(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+                                       <Input
+  type="range"
+  min="1"
+  max="30"
+  step="1"
+  value={currentAge}
+  onChange={(e) => setCurrentAge(parseFloat(e.target.value))}
+  className="customRange w-full"
+  style={{
+    '--progress': `${((currentAge - 1) / (30 - 1)) * 100}%`,
+  }}
+/>
+
                                     </div>
                                     {/* Education Start Age */}
                                     <div className='items-center mt-5 mb-5'>
                                         <div className='flex justify-between'>
-                                            <h1>Age at the Start of Education</h1>
+                                            <h3>Age at the Start of Education</h3>
                                             <input
                                                 type="text"
                                                 value={educationStartAge}
@@ -127,20 +131,24 @@ export default function EducationPlanningCalculator() {
                                                 className="font-semibold text-green-700 w-10 border-none"
                                             />
                                         </div>
-                                        <Input
-                                            type="range"
-                                            min="10"
-                                            max="50"
-                                            step="1"
-                                            value={educationStartAge}
-                                            onChange={(e) => setEducationStartAge(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+                                       <Input
+  type="range"
+  min="10"
+  max="50"
+  step="1"
+  value={educationStartAge}
+  onChange={(e) => setEducationStartAge(parseFloat(e.target.value))}
+  className="customRange w-full"
+  style={{
+    '--progress': `${((educationStartAge - 10) / (50 - 10)) * 100}%`,
+  }}
+/>
+
                                     </div>
                                     {/* Current Education Cost */}
                                     <div>
                                         <div className='flex justify-between'>
-                                            <h1>Current Education Expenses</h1>
+                                            <h3>Current Education Expenses</h3>
                                             <div>
                                                 <span className='font-semibold text-green-700'>₹</span>
                                                 <input
@@ -151,20 +159,24 @@ export default function EducationPlanningCalculator() {
                                                 />
                                             </div>
                                         </div>
-                                        <Input
-                                            type="range"
-                                            min="100000"
-                                            max="10000000"
-                                            step="1000"
-                                            value={totalInvestment}
-                                            onChange={(e) => setTotalInvestment(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+                                       <Input
+  type="range"
+  min="100000"
+  max="10000000"
+  step="1000"
+  value={totalInvestment}
+  onChange={(e) => setTotalInvestment(parseFloat(e.target.value))}
+  className="customRange w-full"
+  style={{
+    '--progress': `${((totalInvestment - 100000) / (10000000 - 100000)) * 100}%`,
+  }}
+/>
+
                                     </div>
                                     {/* Rate of Return */}
                                     <div className='items-center mt-5'>
                                         <div className='flex justify-between'>
-                                            <h1>Rate of Return (%)</h1>
+                                            <h3>Rate of Return (%)</h3>
                                             <input
                                                 type="text"
                                                 value={expectedReturn}
@@ -173,19 +185,23 @@ export default function EducationPlanningCalculator() {
                                             />
                                         </div>
                                         <Input
-                                            type="range"
-                                            min="1"
-                                            max="30"
-                                            step="1"
-                                            value={expectedReturn}
-                                            onChange={(e) => setExpectedReturn(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+  type="range"
+  min="1"
+  max="30"
+  step="1"
+  value={expectedReturn}
+  onChange={(e) => setExpectedReturn(parseFloat(e.target.value))}
+  className="customRange w-full"
+  style={{
+    '--progress': `${((expectedReturn - 1) / (30 - 1)) * 100}%`,
+  }}
+/>
+
                                     </div>
                                     {/* Inflation Rate */}
                                     <div className='items-center mt-5'>
                                         <div className='flex justify-between'>
-                                            <h1>Inflation Rate (%)</h1>
+                                            <h3>Inflation Rate (%)</h3>
                                             <input
                                                 type="text"
                                                 value={inflationRate}
@@ -194,14 +210,18 @@ export default function EducationPlanningCalculator() {
                                             />
                                         </div>
                                         <Input
-                                            type="range"
-                                            min="1"
-                                            max="30"
-                                            step="1"
-                                            value={inflationRate}
-                                            onChange={(e) => setInflationRate(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+  type="range"
+  min="1"
+  max="30"
+  step="1"
+  value={inflationRate}
+  onChange={(e) => setInflationRate(parseFloat(e.target.value))}
+  className="customRange w-full"
+  style={{
+    '--progress': `${((inflationRate - 1) / (30 - 1)) * 100}%`,
+  }}
+/>
+
                                     </div>
                                 </div>
 

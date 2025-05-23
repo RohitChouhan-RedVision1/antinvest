@@ -39,11 +39,11 @@ const Tickers = () => {
                         {data.map((item, index) => (
                             <div key={index} className="md:basis-1/6 lg:basis-1/6">
                                 <div
-                                    className="px-3 py-1 flex items-center gap-2 thirdbgcolor border-r border-white w-64"
+                                    className="px-3 py-1 flex items-center gap-2 thirdbgcolor border-r border-white w-72"
                                 >
                                     <span className="font-bold text-white text-sm whitespace-nowrap">{item?.indexName}</span>
                                     <span className="font-semibold text-gray-100 text-xs">{item?.figure}</span>
-                                  <div className='flex items-center gap-2 bg-gray-800  p-1 w-54  rounded-md'>
+                                  <div className='flex items-center gap-2 bg-gray-800  p-1 w-60  rounded-md'>
                                   <span
                                         className={`font-bold text-xs flex justify-center items-center ${item?.diff_amount > 0 ? 'text-green-300' : 'text-red-500'}`}
                                     >

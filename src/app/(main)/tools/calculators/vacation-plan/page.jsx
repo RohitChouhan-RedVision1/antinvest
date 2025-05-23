@@ -64,11 +64,11 @@ export default function Page() {
        <div className="max-w-screen-xl mx-auto py-[30px] lg:py-[60px]">
          <div className="">
            <div className="mb-5 flex flex-col md:flex-row gap-5 justify-between">
-           <h1 className="text-2xl md:text-3xl font-bold uppercase">
+           <h3 className="text-2xl md:text-3xl font-bold uppercase">
                                Vacation Plan Calculator
-                           </h1>
+                           </h3>
                                        <div className="flex justify-between gap-4">
-                                           <h2>Explore other calculators</h2>
+                                           <span>Explore other calculators</span>
                                            <select
                                                className="w-full border border-gray-500 rounded-lg p-2"
                                                onChange={handleCalculatorChange}
@@ -94,7 +94,7 @@ export default function Page() {
                                    <div className="input-fields mt-5 mb-10">
                                        <div>
                                            <div className='flex justify-between'>
-                                               <h1>Current Vacation Expenses</h1>
+                                               <h3>Current Vacation Expenses</h3>
                                                <div>
                                                    <span className='font-semibold text-green-700'>₹</span>
                                                    <input
@@ -106,18 +106,22 @@ export default function Page() {
                                                </div>
                                            </div>
                                            <Input
-                                               type="range"
-                                               min="10000"
-                                               max="200000"
-                                               step="1000"
-                                               value={totalInvestment}
-                                               onChange={(e) => setCurrentExpenses(parseFloat(e.target.value))}
-                                               className="w-full text-gray-400"
-                                           />
+  type="range"
+  min="10000"
+  max="200000"
+  step="1000"
+  value={totalInvestment}
+  onChange={(e) => setCurrentExpenses(parseFloat(e.target.value))}
+  className="w-full text-gray-400"
+  style={{
+    '--progress': `${((totalInvestment - 10000) / (200000 - 10000)) * 100}%`
+  }}
+/>
+
                                        </div>
                                        <div className='items-center mt-5'>
                                            <div className='flex justify-between'>
-                                               <h1>After How Many Years Do You Wish To Plan Your Holiday?</h1>
+                                               <h3>After How Many Years Do You Wish To Plan Your Holiday?</h3>
                                                <input
                                                    type="text"
                                                    value={investmentDuration}
@@ -125,19 +129,23 @@ export default function Page() {
                                                    className="font-semibold text-green-700 w-10 border-none"
                                                />
                                            </div>
-                                           <Input
-                                               type="range"
-                                               min="1"
-                                               max="40"
-                                               step="1"
-                                               value={investmentDuration}
-                                               onChange={(e) => setInvestmentDuration(parseFloat(e.target.value))}
-                                               className="w-full text-gray-400"
-                                           />
+                                          <Input
+  type="range"
+  min="1"
+  max="40"
+  step="1"
+  value={investmentDuration}
+  onChange={(e) => setInvestmentDuration(parseFloat(e.target.value))}
+  className="w-full text-gray-400"
+  style={{
+    '--progress': `${((investmentDuration - 1) / (40 - 1)) * 100}%`
+  }}
+/>
+
                                        </div>
                                        <div className='items-center mt-5'>
                                            <div className='flex justify-between'>
-                                               <h1>Rate of Return (%)</h1>
+                                               <h3>Rate of Return (%)</h3>
                                                <input
                                                    type="text"
                                                    value={expectedReturn}
@@ -145,19 +153,23 @@ export default function Page() {
                                                    className="font-semibold text-green-700 w-10 border-none"
                                                />
                                            </div>
-                                           <Input
-                                               type="range"
-                                               min="1"
-                                               max="30"
-                                               step="1"
-                                               value={expectedReturn}
-                                               onChange={(e) => setExpectedReturn(parseFloat(e.target.value))}
-                                               className="w-full text-gray-400"
-                                           />
+                                          <Input
+  type="range"
+  min="1"
+  max="30"
+  step="1"
+  value={expectedReturn}
+  onChange={(e) => setExpectedReturn(parseFloat(e.target.value))}
+  className="w-full text-gray-400"
+  style={{
+    '--progress': `${((expectedReturn - 1) / (30 - 1)) * 100}%`
+  }}
+/>
+
                                        </div>
                                        <div className='items-center mt-5'>
                                            <div className='flex justify-between'>
-                                               <h1>Inflation Rate (%)</h1>
+                                               <h3>Inflation Rate (%)</h3>
                                                <input
                                                    type="text"
                                                    value={inflationRate}
@@ -165,15 +177,19 @@ export default function Page() {
                                                    className="font-semibold text-green-700 w-10 border-none"
                                                />
                                            </div>
-                                           <Input
-                                               type="range"
-                                               min="0"
-                                               max="30"
-                                               step="1"
-                                               value={inflationRate}
-                                               onChange={(e) => setInflationRate(parseFloat(e.target.value))}
-                                               className="w-full text-gray-400"
-                                           />
+                                          <Input
+  type="range"
+  min="0"
+  max="30"
+  step="1"
+  value={inflationRate}
+  onChange={(e) => setInflationRate(parseFloat(e.target.value))}
+  className="w-full text-gray-400"
+  style={{
+    '--progress': `${(inflationRate / 30) * 100}%`
+  }}
+/>
+
                                        </div>
                                    </div>
 

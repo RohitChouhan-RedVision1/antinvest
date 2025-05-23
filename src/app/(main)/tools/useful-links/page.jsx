@@ -32,7 +32,7 @@ const UsefulLinksPage = () => {
                 <h1 className="text-gray-900 text-3xl md:text-5xl font-bold">Useful Links</h1>
             </div>
     <div className="">
-      <div className="container mx-auto md:px-20 px-4 pt-5">
+      <div className="max-w-screen-xl mx-auto main_section px-4 pt-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {usefulLink.map((link, index) => (
             <Link href={link.link} key={index} legacyBehavior>

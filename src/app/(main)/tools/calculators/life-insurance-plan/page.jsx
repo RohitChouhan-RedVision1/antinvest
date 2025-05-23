@@ -66,12 +66,12 @@ export default function Page() {
         <div className="">
             <div className="mb-5 flex flex-col md:flex-row gap-5 justify-between">
             <div className="">
-                        <h1 className="text-2xl md:text-3xl font-bold uppercase">
+                        <h3 className="text-2xl md:text-3xl font-bold uppercase">
                             Life Insurance Planning Calculator
-                        </h1>
+                        </h3>
                     </div>
                 <div className="flex justify-between gap-4">
-                    <h2>Explore other calculators</h2>
+                    <span>Explore other calculators</span>
                     <select
                         className="w-full border border-gray-500 rounded-lg p-2"
                         onChange={handleCalculatorChange}
@@ -97,7 +97,7 @@ export default function Page() {
                                 <div className="input-fields mt-5 mb-10">
                                     <div>
                                         <div className='flex justify-between'>
-                                            <h1>Loan Amount</h1>
+                                            <h3>Loan Amount</h3>
                                             <div>
                                                 <span className='font-semibold text-green-700'>₹</span>
                                                 <input
@@ -108,19 +108,23 @@ export default function Page() {
                                                 />
                                             </div>
                                         </div>
-                                        <Input
-                                            type="range"
-                                            min="10000"
-                                            max="10000000"
-                                            step="1000"
-                                            value={loanAmount}
-                                            onChange={(e) => setLoanAmount(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+                                       <Input
+  type="range"
+  min="10000"
+  max="10000000"
+  step="1000"
+  value={loanAmount}
+  onChange={(e) => setLoanAmount(parseFloat(e.target.value))}
+  className="customRange w-full"
+  style={{
+    '--progress': `${((loanAmount - 10000) / (10000000 - 10000)) * 100}%`,
+  }}
+/>
+
                                     </div>
                                     <div className='items-center mt-5'>
                                         <div className='flex justify-between'>
-                                            <h1>Current FD Rate (%)</h1>
+                                            <h3>Current FD Rate (%)</h3>
                                             <input
                                                 type="text"
                                                 value={currentFdRate}
@@ -128,19 +132,23 @@ export default function Page() {
                                                 className="font-semibold text-green-700 w-10 border-none"
                                             />
                                         </div>
-                                        <Input
-                                            type="range"
-                                            min="1"
-                                            max="15"
-                                            step="0.1"
-                                            value={currentFdRate}
-                                            onChange={(e) => setCurrentFdRate(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+                                       <Input
+  type="range"
+  min="1"
+  max="15"
+  step="0.1"
+  value={currentFdRate}
+  onChange={(e) => setCurrentFdRate(parseFloat(e.target.value))}
+  className="customRange w-full"
+  style={{
+    '--progress': `${((currentFdRate - 1) / (15 - 1)) * 100}%`,
+  }}
+/>
+
                                     </div>
                                     <div className='items-center mt-5'>
                                         <div className='flex justify-between'>
-                                            <h1>Inflation Rate (%)</h1>
+                                            <h3>Inflation Rate (%)</h3>
                                             <input
                                                 type="text"
                                                 value={inflationRate}
@@ -149,18 +157,22 @@ export default function Page() {
                                             />
                                         </div>
                                         <Input
-                                            type="range"
-                                            min="1"
-                                            max="30"
-                                            step="1"
-                                            value={inflationRate}
-                                            onChange={(e) => setInflationRate(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+  type="range"
+  min="1"
+  max="30"
+  step="1"
+  value={inflationRate}
+  onChange={(e) => setInflationRate(parseFloat(e.target.value))}
+  className="customRange w-full"
+  style={{
+    '--progress': `${((inflationRate - 1) / (30 - 1)) * 100}%`,
+  }}
+/>
+
                                     </div>
                                     <div className='items-center mt-5'>
                                         <div className='flex justify-between'>
-                                            <h1>For How Many Years You Want To Protect Your Household Expenses</h1>
+                                            <h3>For How Many Years You Want To Protect Your Household Expenses</h3>
                                             <input
                                                 type="text"
                                                 value={protectionDuration}
@@ -168,19 +180,23 @@ export default function Page() {
                                                 className="font-semibold text-green-700 w-10 border-none"
                                             />
                                         </div>
-                                        <Input
-                                            type="range"
-                                            min="1"
-                                            max="40"
-                                            step="1"
-                                            value={protectionDuration}
-                                            onChange={(e) => setProtectionDuration(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+                                       <Input
+  type="range"
+  min="1"
+  max="40"
+  step="1"
+  value={protectionDuration}
+  onChange={(e) => setProtectionDuration(parseFloat(e.target.value))}
+  className="customRange w-full"
+  style={{
+    '--progress': `${((protectionDuration - 1) / (40 - 1)) * 100}%`,
+  }}
+/>
+
                                     </div>
                                     <div className='items-center mt-5'>
                                         <div className='flex justify-between'>
-                                            <h1>Monthly Expenses</h1>
+                                            <h3>Monthly Expenses</h3>
                                             <div>
                                                 <span className='font-semibold text-green-700'>₹</span>
                                                 <input
@@ -192,14 +208,18 @@ export default function Page() {
                                             </div>
                                         </div>
                                         <Input
-                                            type="range"
-                                            min="0"
-                                            max="500000"
-                                            step="1000"
-                                            value={monthlyExpenses}
-                                            onChange={(e) => setMonthlyExpenses(parseFloat(e.target.value))}
-                                            className="w-full text-gray-400"
-                                        />
+  type="range"
+  min="0"
+  max="500000"
+  step="1000"
+  value={monthlyExpenses}
+  onChange={(e) => setMonthlyExpenses(parseFloat(e.target.value))}
+  className="customRange w-full"
+  style={{
+    '--progress': `${(monthlyExpenses / 500000) * 100}%`,
+  }}
+/>
+
                                     </div>
                                 </div>
 
