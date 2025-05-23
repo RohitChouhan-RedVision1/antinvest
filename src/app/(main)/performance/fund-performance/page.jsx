@@ -76,7 +76,7 @@ export default function MarketUpdate() {
   useEffect(() => {
     fetchCategories();
   }, []);
-
+console.log(categories)
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
     fetchSchemes(category);
@@ -134,13 +134,13 @@ export default function MarketUpdate() {
                 key={index}
                 className={`px-3 py-3 bg-white border ${
                   selectedCategory === item
-                    ? "border-[#00aeef]"
+                    ? "border-[var(--rv-primary)]"
                     : "border-gray-300"
                 } rounded shadow cursor-pointer flex flex-col items-center`}
                 onClick={() => handleCategorySelect(item)}
               >
                 <Image
-                  src={`/mf-adda/${item}.svg`}
+                  src={`/icons/${item}.svg`}
                   width={70}
                   height={70}
                   className="mb-5 text-teal-500 "
@@ -168,7 +168,7 @@ export default function MarketUpdate() {
                 <div
                   key={index}
                   className={`px-3 py-3 ${
-                    selectedScheme === scheme ? "bg-[#00aeef]/80" : "bg-white"
+                    selectedScheme === scheme ? "bg-[var(--rv-primary)]" : "bg-white"
                   } border border-gray-200 rounded shadow cursor-pointer my-2`}
                   onClick={() => handleSchemeSelect(scheme)}
                 >

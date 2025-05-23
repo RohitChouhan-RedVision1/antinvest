@@ -1,4 +1,4 @@
-'use client';
+
 import styles from './FeaturesSection.module.css';
 import React from 'react';
 import { calculators } from '@/data/calculators';

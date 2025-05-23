@@ -1,19 +1,9 @@
-"use client"
-import { useEffect, useState } from 'react';
+
 import styles from './AboutSection.module.css';
 import Image from 'next/image';
 import { FaCheckCircle } from "react-icons/fa";
 
-export default function AboutSection() {
-    const [mainData, setMainData] = useState("");
-    const fetchdata = async () => {
-        const data = await fetch("/api/admin/site-settings", { cache: "no-store" });
-        if (data.ok) {
-            const maindata = await data.json();
-            setMainData(maindata[0])
-        }
-    };
-    useEffect(() => { fetchdata() }, [])
+export default function AboutSection({mainData}) {
     return (
         <div className={`${styles.aboutUs} main_section`}>
             <div className="mx-auto  max-w-screen-xl px-2 lg:px-0">

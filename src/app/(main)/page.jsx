@@ -30,7 +30,7 @@ export default async function Page() {
     <AnimatedContent>
       <div className='overflow-x-hidden'>
         <HeroSection sitedata={sitedata} />
-        <AboutSection/>
+        <AboutSection mainData={sitedata}/>
         <OurServices services={services}/>
         <AdvisorCategory/>
         <Calculator siteData={sitedata}/>
