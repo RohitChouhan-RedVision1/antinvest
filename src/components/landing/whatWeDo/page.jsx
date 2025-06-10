@@ -5,7 +5,7 @@ import { IoArrowUpCircle } from "react-icons/io5";
 
 export default function WhatWeDo() {
     return (
-        <div class="bg-[#E7EBEF] main_section">
+        <div class="bg-[#f9f9f9] main_section">
             <div class="mx-auto  max-w-screen-xl px-2 lg:px-0">
                 <div class="grid grid-cols-1 lg:grid-cols-2 align-items-center">
                     <div class="col-lg-6">

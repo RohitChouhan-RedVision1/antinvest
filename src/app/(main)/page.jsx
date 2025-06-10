@@ -31,13 +31,15 @@ export default async function Page() {
       <div className='overflow-x-hidden'>
         <HeroSection sitedata={sitedata} />
         <AboutSection mainData={sitedata}/>
-        <OurServices services={services}/>
         <AdvisorCategory/>
+        <OurServices services={services}/>
+        
         <Calculator siteData={sitedata}/>
         <WhyChooseUs/>
         <TopFeatures/>
-        <FAQ/>
+       
         <WhatWeDo/>
+         <FAQ/>
         <Testimonials/>
       
         <BlogsSection blogs={blogs}/>

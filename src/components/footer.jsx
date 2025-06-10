@@ -34,6 +34,10 @@ const Footer = ({ sitedata, servicedata, arn, socialmedialinks }) => {
       title: "Blogs",
       link: "/blogs",
     },
+     {
+      title: "Financial News",
+      link: "/financial-news",
+    },
     {
       title: "Financial Calculator",
       link: "/tools/calculators",
@@ -57,14 +61,14 @@ const Footer = ({ sitedata, servicedata, arn, socialmedialinks }) => {
     },
   ];
   return (
-    <footer className="bg-[var(--rv-secondary)]  bg-blend-overlay border-t-2 md:mt-88 sm:mt-88">
+    <footer className="bg-[var(--rv-secondary)]  bg-blend-overlay border-t-2 main_section1">
       <div className="mx-auto w-full max-w-screen-xl ">
-        <div className="grid grid-cols-1  gap-3 py-6 md:grid-cols-2 lg:grid-cols-4 md:px-0 px-4">
+        <div className="grid grid-cols-1  gap-3  md:grid-cols-2 lg:grid-cols-4 md:px-0 px-4">
           <div className="">
             <Image
               src={"/logo.png"}
               alt="logo"
-              width={200}
+              width={250}
               height={200}
               className="p-4 bg-white rounded-[10px]"
             />
@@ -174,7 +178,7 @@ const Footer = ({ sitedata, servicedata, arn, socialmedialinks }) => {
             </ul>
           </div>
         </div>
-        <div className="flex gap-x-3 justify-center">
+        <div className="flex gap-x-3 justify-center py-3">
           {socialmedialinks
             .filter((link) => !link.isHidden)
             .map((link, index) => (

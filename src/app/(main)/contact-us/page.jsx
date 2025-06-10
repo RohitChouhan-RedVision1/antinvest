@@ -60,7 +60,7 @@ export default async function ContactUs() {
         </div>
 
         {/* Contact Form */}
-        <div className="w-full">
+        <div className="">
           <ContactReusableForm sitedata={sitedata} />
         </div>
       </div>

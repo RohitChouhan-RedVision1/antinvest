@@ -118,7 +118,7 @@ export default function ContactReusableForm({ sitedata }) {
         className={styles.textarea}
       ></textarea>
 
-      <div className="my-3">
+      <div className="">
         <HCaptcha
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
           onVerify={setHcaptchaToken}
@@ -127,7 +127,7 @@ export default function ContactReusableForm({ sitedata }) {
 
       <button
         type="submit"
-        className="secondarybutton md:w-1/2 mt-2"
+        className="secondarybutton md:w-1/2"
         disabled={loading}
       >
         {loading ? "Sending..." : "Send Message"}

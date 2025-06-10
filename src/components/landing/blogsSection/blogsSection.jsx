@@ -17,15 +17,15 @@ export default function BlogSection({blogs}) {
                 <div className={styles.gridBackground}></div>
 
                 {/* Heading */}
-                <div className="section-title">
-                <h3 className="wow fadeInUp">Our Testimonial</h3>
-                <h2 className="text-anime-style-2" data-cursor="-opaque">
-                  1250+ Customers Say <span>About Our Finance</span>
-                </h2>
-                <p className="wow fadeInUp" data-wow-delay="0.2s">
-                  With over 1,250 satisfied clients, our finance and consulting services have earned praise for reliability, personalized guidance, and impactful results.
-                </p>
-              </div>
+               <div class="section-title">
+    <h3 class="wow fadeInUp">Our Blog</h3>
+    <h2 class="text-anime-style-2" data-cursor="-opaque">
+        Dive into Our Insights on <span>Finance and Consulting</span>
+    </h2>
+    <p class="wow fadeInUp" data-wow-delay="0.2s">
+        Explore our blog for expert articles, practical advice, and the latest trends in finance and consulting. We share valuable insights to help you navigate complex financial landscapes and make informed decisions.
+    </p>
+</div>
 
                 {/* Blog Cards */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 z-1 relative mt-5 items-center content-center">

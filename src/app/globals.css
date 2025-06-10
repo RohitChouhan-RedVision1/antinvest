@@ -18,7 +18,11 @@ body {
 }
 
  .main_section{
-  padding: 50px 5px;
+  padding: 100px 5px;
+}
+
+ .main_section1{
+  padding: 100px 5px 0 0;
 }
 
 @keyframes animation-1 {

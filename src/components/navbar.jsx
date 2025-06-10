@@ -132,7 +132,7 @@ export function Navbar({ services }) {
       <div className="relative max-w-screen-xl flex items-center justify-between my-6 mx-auto px-4">
         <div className="">
           <Link href="/">
-          <Image src="/logo.png" alt="logo" width={150} height={100} />
+          <Image src="/logo.png" alt="logo" width={200} height={100} />
           </Link>
         </div>
         <div className="flex-1 max-w-4xl hidden lg:block mx-auto ">
