@@ -46,7 +46,7 @@ const SubscribCard = () => {
     ];
     return (
         <div className="bg-[#FFD2D3]">
-            <div className="max-w-screen-xl px-10 py-[30px] md:py-[60px] mx-auto text-center border-b-1 text-gray-400 ">
+            <div className="max-w-screen-xl px-10 main_section mx-auto text-center border-b-1 text-gray-400 ">
                 {/* <motion.h2 initial="hidden"
           whileInView="visible"
           viewport={{ once: false, amount: 0.2 }}

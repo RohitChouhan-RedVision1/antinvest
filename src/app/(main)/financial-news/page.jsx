@@ -83,7 +83,7 @@ export default function LatestNews() {
           </h1>
         </div>
       </div>
-      <div className="max-w-screen-xl mx-auto py-[30px] md:py-[60px]">
+      <div className="max-w-screen-xl mx-auto main_section">
         {/* Buttons with active class and hover effect */}
         <div className="grid md:grid-cols-3 grid-cols-1 mb-6">
           <div

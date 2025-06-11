@@ -29,7 +29,7 @@ export default function BseChartSection() {
     }, []);
 
     return (
-        <div className="max-w-screen-xl mx-auto py-[30px] md:py-[60px] px-3 md:px-0">
+        <div className="max-w-screen-xl mx-auto main_section px-3 md:px-0">
             <div className={styles.consultationContainer}>
                 {/* Heading and Description */}
                 <div className={styles.imageContainer}>

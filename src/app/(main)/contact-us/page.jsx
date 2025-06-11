@@ -16,7 +16,7 @@ export default async function ContactUs() {
           </h1>
         </div>
       </div>
-      <div className="max-w-screen-xl mx-auto  py-[30px] md:py-[60px]">
+      <div className="max-w-screen-xl mx-auto  main_section">
       {/* Contact Info Cards */}
       <div className="flex  flex-col  gap-4 overflow-hidden rounded-lg mb-8">
         {/* Call Us */}

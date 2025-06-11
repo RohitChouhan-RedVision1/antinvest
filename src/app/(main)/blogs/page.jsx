@@ -16,7 +16,7 @@ const Blogs = async () => {
           </h1>
         </div>
       </div>
-        <div className="max-w-screen-xl mx-auto px-4 lg:px-10 py-[30px]">
+        <div className="max-w-screen-xl mx-auto px-4 lg:px-10">
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
         {/* <Suspense fallback={<Loading />}> */}
           {data?.map((item, index) => (

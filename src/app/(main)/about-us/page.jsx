@@ -45,7 +45,7 @@ export default function AboutUs() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.2 }}
-        className="md:my-20 my-10 md:px-0 px-3"
+        className="main_section md:px-0 px-3"
       >
         <h2 className="text-4xl text-[var(--rv-primary)] md:text-5xl font-bold mb-6 text-center">
           About Us
@@ -82,7 +82,7 @@ export default function AboutUs() {
       </motion.section>
 
       <div className="bg-[var(--rv-secondary)]">
-        <div className="max-w-screen-xl mx-auto md:py-20 py-10 md:px-0 px-3">
+        <div className="max-w-screen-xl mx-auto main_section md:px-0 px-3">
           {/* Transforming Ambitions Section */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
@@ -119,7 +119,7 @@ export default function AboutUs() {
         </div>
       </div>
 
-      <div className="max-w-screen-xl mx-auto md:py-20 py-10 md:px-0 px-3">
+      <div className="max-w-screen-xl mx-auto main_section md:px-0 px-3">
         {/* Mission, Vision, Value Section */}
         <motion.section
           initial={{ opacity: 0 }}
@@ -185,7 +185,7 @@ export default function AboutUs() {
       </div>
 
       <div className="bg-[var(--rv-secondary)]">
-        <div className="max-w-screen-xl mx-auto md:py-20 py-10 md:px-0 px-3">
+        <div className="max-w-screen-xl mx-auto main_section md:px-0 px-3">
           <motion.section
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -351,7 +351,7 @@ export default function AboutUs() {
         </div>
       </div>
 
-      <div className="max-w-screen-xl mx-auto py-20">
+      <div className="max-w-screen-xl mx-auto main_section">
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

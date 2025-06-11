@@ -304,7 +304,7 @@ export default function Page() {
           </h1>
         </div>
       </div>
-      <div className="max-w-screen-xl mx-auto py-[30px] md:py-[60px]">
+      <div className="max-w-screen-xl mx-auto main_section">
       <Toaster />
      
       <div>

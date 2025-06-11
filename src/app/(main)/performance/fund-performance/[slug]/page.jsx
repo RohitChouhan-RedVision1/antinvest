@@ -92,7 +92,7 @@ export default function Page() {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto py-[30px] md:py-[60px]">
+    <div className="max-w-screen-xl mx-auto main_section">
       <div className="">
      
 
