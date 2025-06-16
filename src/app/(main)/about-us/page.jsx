@@ -9,6 +9,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AboutSection from "@/components/landing/aboutSection/aboutSection";
 import WhyChooseUs from "@/components/landing/whytochoose";
+import SubscribCard from "@/components/landing/partnersSection";
 
 export function generatemetadata() {
   return {
@@ -43,6 +44,7 @@ export default function AboutUs() {
       </div>
 
 <AboutSection sitedata={siteSettings}/>
+
       {/* Introduction Section */}
       <motion.section
         initial={{ opacity: 0 }}
@@ -360,6 +362,7 @@ export default function AboutUs() {
         </div>
       </div>
 
+<SubscribCard sitedata={siteSettings}/>
       <div className="max-w-screen-xl mx-auto main_section">
         <motion.section
           initial={{ opacity: 0, y: 20 }}

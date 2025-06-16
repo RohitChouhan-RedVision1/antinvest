@@ -78,7 +78,7 @@ const Footer = ({ sitedata, servicedata, arn, socialmedialinks }) => {
             </p>
             <div className="flex flex-col  py-3  gap-5">
           
-          <Link  href={"https://play.google.com/store/apps/details?id=com.nine15fintech.nine15"} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+          <Link  href={"https://play.google.com/store/apps/details?id=com.antinvest.antworks"} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
           <button
             className="text-white text-2xl font-semibold px-10 py-6 rounded-2xl cursor-pointer"
             style={{
@@ -91,7 +91,7 @@ const Footer = ({ sitedata, servicedata, arn, socialmedialinks }) => {
             
           </button>
         </Link>
-        <Link  href={"https://apps.apple.com/us/app/nine15-fintech/id6746642805"} target="_blank" rel="noopener noreferrer" className="cursor-pointer ">
+        <Link  href={"https://apps.apple.com"} target="_blank" rel="noopener noreferrer" className="cursor-pointer ">
           <button
             className="text-white text-2xl font-semibold px-10 py-6 rounded-2xl cursor-pointer"
             style={{

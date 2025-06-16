@@ -34,7 +34,7 @@ const SubscribCard = ({sitedata}) => {
 </span>
   </h2>
   <p data-aos="fade-up" data-aos-anchor-placement="bottom">
-    At {sitedata.websiteName}, we collaborate with a wide range of top AMCs and product partners to offer you the best financial solutions. Below is a showcase of our esteemed partners — click on any logo to explore more about their offerings.
+    At {sitedata?.websiteName}, we collaborate with a wide range of top AMCs and product partners to offer you the best financial solutions. Below is a showcase of our esteemed partners — click on any logo to explore more about their offerings.
   </p>
 </div>
 

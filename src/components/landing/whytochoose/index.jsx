@@ -106,7 +106,7 @@ const WhyChooseUs = ({ sitedata }) => {
               <div
                 className={styles.whyChooseImg1}
                 data-aos="fade-left"
-                data-aos-anchor-placement="bottom-center"
+                data-aos-anchor-placement="top-center"
               >
                 <figure className="image-anime">
                   <Image
