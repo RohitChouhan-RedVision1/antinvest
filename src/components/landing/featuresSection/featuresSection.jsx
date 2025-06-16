@@ -9,8 +9,8 @@ const TopFeatures = () => {
         {
             animation: "fade-right",
             link: "/tools/calculators",
-            title: 'Financial Calculator',
-            description: 'Utilize our powerful financial calculators to plan your investments, loans, and savings with precision.',
+            title: 'Investment Calculator',
+            description: 'Estimate your future returns with SIP or lump sum plans, helping you invest with clarity and confidence.',
             images: {
                 default: '/images/calculator.svg',
                 hover: '/images/calculator.svg'
@@ -19,8 +19,8 @@ const TopFeatures = () => {
         {
             animation: "fade-up",
             link: "/tools/financial-health",
-            title: 'Financial Health',
-            description: 'Assess your current financial standing and get personalized recommendations for improvement and growth.',
+            title: ' Financial Health Monitor',
+            description: 'Track income, expenses, savings, and overall financial well-being to stay on top of your goals.',
             images: {
                 default: '/images/medical-report.svg',
                 hover: '/images/medical-report.svg'
@@ -29,8 +29,8 @@ const TopFeatures = () => {
         {
             link: "/tools/risk-profile",
             animation: "fade-up",
-            title: 'Risk Profile',
-            description: 'Understand your investment risk tolerance to align your portfolio with your comfort level and financial goals.',
+            title: 'Risk Assessment Tool',
+            description: 'Determine your investment risk profile to get matched with portfolios that fit your comfort level.',
             images: {
                 default: '/images/profile-account.svg',
                 hover: '/images/profile-account.svg'
@@ -39,18 +39,18 @@ const TopFeatures = () => {
         {
             link: "/tools/pay-premium-online",
             animation: "fade-right",
-            title: 'Pay Premium Online',
-            description: 'Conveniently pay your insurance premiums online, ensuring your policies stay active and secure.',
+            title: 'Online Premium Payment',
+            description: 'Make hassle-free and secure payments for your mutual fund or insurance premiums online.',
             images: {
                 default: '/images/vip-card.svg',
                 hover: '/images/vip-card.svg'
             }
         },
         {
-            link: "/tools/useful-links",
+            link: "/blogs",
             animation: "fade-right",
-            title: 'Useful Links',
-            description: 'Access a curated collection of valuable external resources and links related to finance and investment.',
+            title: 'Knowledge Hub',
+            description: 'Learn through curated articles, tips, and expert insights to make smarter financial choices.',
             images: {
                 default: '/images/link.svg',
                 hover: '/images/link.svg'
@@ -58,9 +58,9 @@ const TopFeatures = () => {
         },
         {
             animation: "fade-right",
-            link: "/financial-news",
-            title: 'Financial News',
-            description: 'Stay updated with the latest financial news, market insights, and expert analysis to make informed decisions.',
+            link: "/",
+            title: ' Paperless Onboarding',
+            description: 'Get started instantly with a fully digital, secure, and paperless KYC and investment process.',
             images: {
                 default: '/images/cloud-file.svg',
                 hover: '/images/cloud-file.svg'
@@ -76,13 +76,10 @@ const TopFeatures = () => {
                         <div className="section-title dark-section">
                             <h3 className="wow fadeInUp">Our Feature</h3>
                             <h2 className="text-anime-style-2" data-cursor="-opaque">
-                                Key features of our finance <span>and consulting</span>
+                                Empowering You with <span>Smart Financial Tools</span>
                             </h2>
                             <p data-aos="fade-up" data-aos-anchor-placement="bottom">
-                                Discover a range of services designed to support your financial
-                                journey — from investments to loans, credit sourcing, and more.
-                                Our expert guidance ensures you make informed and confident
-                                financial decisions.
+                               Access a suite of powerful, easy-to-use tools designed to simplify investing, improve financial decision-making, and streamline your wealth journey — all in one secure platform.
                             </p>
                         </div>
                     </div>

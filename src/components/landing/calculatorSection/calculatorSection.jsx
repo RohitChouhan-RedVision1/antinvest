@@ -266,17 +266,15 @@ export default function Calculator({ siteData }) {
           <div className="section-title dark-section text-center">
             <h3 className="text-anime-style-1">sip calculator</h3>
             <h2 className="text-anime-style-2" data-cursor="-opaque">
-              Plan your <span className="">wealth journey</span> with confidence
+              Forecast Your Financial Growth with <span className="">Confidence and Clarity</span>
             </h2>
             <p
               className="text-anime-style-2"
               data-aos="fade-up"
               data-aos-anchor-placement="bottom"
             >
-              Use our SIP calculator to estimate the future value of your
-              investments. Enter your monthly contribution, investment duration,
-              and expected return rate to visualize how your wealth can grow
-              over time with the power of compounding.
+              Take charge of your financial future by forecasting the growth of your investments with our powerful SIP calculator. Input your monthly contribution, investment duration, and expected return rate to visualize how compounding interest can amplify your wealth over time. Make informed, confident decisions to reach your financial goals faster and smarter.
+
             </p>
           </div>
 

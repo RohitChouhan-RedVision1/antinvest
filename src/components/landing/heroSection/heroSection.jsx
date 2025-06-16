@@ -4,7 +4,7 @@ import styles from "./Hero.module.css";
 import Image from "next/image";
 
 export default function HeroSection({ sitedata }) {
-  const a = `Welcome to ${sitedata.websiteName} where we believe that your financial journey is unique, and we are committed to guide you through every step. From building wealth to securing your future, we offer a range of solutions to help you achieve your goals and create the life you’ve always envisioned.`;
+  const a = `Start your wealth-building journey with ${sitedata?.websiteName}. Choose from handpicked mutual fund schemes, enjoy expert insights, and track performance in real-time. Whether you're a beginner or a seasoned investor, we make mutual fund investing easy and rewarding.`;
 
   return (
     <div className="max-w-screen-2xl px-2 lg:px-0 mx-auto relative">
@@ -25,16 +25,22 @@ export default function HeroSection({ sitedata }) {
       <div className="mt-1">
         <div className="text-center max-w-6xl mx-auto space-y-2">
           <h1 className="text-anime-style-1 text-3xl md:text-4xl lg:text-5xl font-bold mb-5">
-            Unlocking Your Path to Financial Freedom
+            Invest in Top Rated Mutual Funds <br />
+            <span className="text-2xl text-[--rv-primary]">Simple, Safe & Smart with {sitedata?.websiteName}</span>
           </h1>
           <p className="" data-aos="fade-up" data-aos-duration="600">
             {a}
           </p>
-          <div className="pt-6">
+          <div className="pt-6 flex justify-center gap-4">
             <Link
-              href={"/about-us"}
+              href={"/contact-us"}
             >
-              <button className="primarybutton">Know More</button>
+              <button className="primarybutton">Invest Now</button>
+            </Link>
+            <Link
+              href={"/performance/fund-performance"}
+            >
+              <button className="secondarybutton">Explore Funds</button>
             </Link>
           </div>
         </div>
@@ -77,7 +83,7 @@ export default function HeroSection({ sitedata }) {
   <Link href="/tools/calculators/lumpsum-calculator" className="group block  p-4 bg-white text-black hover:text-white hover:bg-[var(--rv-primary)] transition-all duration-300">
   <div className="flex items-center space-x-4">
     <img
-      src="/images/calculators/calculator-form1.svg"
+      src="/images/calculators/lumpsum calculator.svg"
       alt="SIP Calculator"
       className="w-10 h-10 transition duration-300 group-hover:brightness-0 group-hover:invert"
     />
@@ -88,7 +94,7 @@ export default function HeroSection({ sitedata }) {
 <Link href="/tools/calculators/swp-calculator" className="group block  p-4 bg-white text-black hover:text-white hover:bg-[var(--rv-primary)] transition-all duration-300">
   <div className="flex items-center space-x-4">
     <img
-      src="/images/calculators/calculator-form1.svg"
+      src="/images/calculators/swp-calculator.svg"
       alt="SIP Calculator"
       className="w-10 h-10 transition duration-300 group-hover:brightness-0 group-hover:invert"
     />

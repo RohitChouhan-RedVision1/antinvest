@@ -45,34 +45,34 @@ const childFade = {
 export function FAQ() {
   const faqs = [
     {
-      question: "Why should I choose Redvission to manage my investments?",
+      question: " Why should I choose Ant Invest for my mutual fund investments?",
       answer:
-        "At Redvission, we don’t just recommend products—we build portfolios aligned with your life goals...",
+        "Ant Invest offers expert-curated portfolios, personalized plans, and a secure, easy-to-use platform designed to help you grow your wealth efficiently and confidently.",
     },
     {
-      question: "Is my money safe if I invest through Redvission?",
+      question: "Is my investment safe with Ant Invest?",
       answer:
-        "Absolutely. Your investments are held with SEBI-registered mutual funds...",
+        " Yes. We prioritize security and transparency. Your investments are managed through regulated mutual fund providers, and our platform uses top-level encryption to protect your data.",
     },
     {
-      question: "Do I have to pay anything to get started?",
+      question: " Are there any fees to start investing?",
       answer:
-        "No. We don’t charge you any upfront or advisory fees...",
+        "You can start with no hidden charges. Our platform is transparent about all applicable fees, and we provide clear information upfront.",
     },
     {
-      question: "What kind of investors do you work with?",
+      question: "What types of investors do you cater to?",
       answer:
-        "Whether you're just starting your investment journey or managing a multi-crore portfolio...",
+        "Whether you are a beginner or an experienced investor, we provide tailored investment plans suited for various risk appetites and financial goals.",
     },
     {
-      question: "Will I get regular updates and personal support?",
+      question: " Will I receive regular updates and support?",
       answer:
-        "Yes! We provide timely portfolio reviews, performance insights...",
+        "Absolutely. You get real-time portfolio tracking, market insights, and access to our expert support team whenever you need assistance.",
     },
     {
-      question: "I’ve already invested elsewhere. Can you still help?",
+      question: "Can I transfer or track investments made outside Ant Invest?",
       answer:
-        "Of course. We offer portfolio reviews and restructuring...",
+        "Yes, you can consolidate your mutual fund portfolio by adding investments made through other platforms for a comprehensive view of your wealth.",
     },
   ];
 
@@ -87,8 +87,7 @@ export function FAQ() {
     Frequently Asked <span>Questions</span>
   </h2>
   <p data-aos="fade-up" data-aos-anchor-placement="bottom">
-    Get quick answers to common queries about our financial services. Whether you're exploring
-    investment options or need clarity on credit and consulting solutions, our FAQs are here to help.
+    Find quick answers to common questions about our mutual fund investments, financial planning, credit support, and platform features. We’re here to help you make informed financial decisions with confidence.
   </p>
 </div>
 

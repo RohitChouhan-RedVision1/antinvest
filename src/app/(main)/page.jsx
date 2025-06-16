@@ -8,7 +8,7 @@ import BseChartSection from '@/components/landing/bsechartSection/bsechartSectio
 import SipCalculator from '@/components/landing/sipcalculatort';
 import AnimatedContent from '@/components/AnimatedContent';
 import { getLatestBlogs, getServiceData, getSiteData, getSocialMedia, getTestimonials } from '@/lib/functions';
-import SubscribCard from '@/components/partners/partners';
+
 import SocialMediaSidebar from '@/components/socialMedia/index';
 import OurServices from '@/components/landing/serviceSection/ourServices';
 import AdvisorCategory from '@/components/landing/advisoryCategory/advisoryCategory';
@@ -18,6 +18,7 @@ import TopFeatures from '@/components/landing/featuresSection/featuresSection';
 import { FAQ } from '@/components/landing/faqSection/faqSection';
 import WhatWeDo from '@/components/landing/whatWeDo/page';
 import { Testimonials } from '@/components/landing/testimonials/testimonials';
+import SubscribCard from '@/components/landing/partnersSection';
 
 export default async function Page() {
      const sitedata = await getSiteData();
@@ -30,17 +31,18 @@ export default async function Page() {
     <AnimatedContent>
       <div className='overflow-x-hidden'>
         <HeroSection sitedata={sitedata} />
-        <AboutSection mainData={sitedata}/>
+        <AboutSection sitedata={sitedata}/>
+        <SubscribCard sitedata={sitedata}/>
         <AdvisorCategory/>
-        <OurServices services={services}/>
+        <OurServices services={services} sitedata={sitedata}/>
         
         <Calculator siteData={sitedata}/>
-        <WhyChooseUs/>
+        <WhyChooseUs sitedata={sitedata}/>
         <TopFeatures/>
        
-        <WhatWeDo/>
+        <WhatWeDo sitedata={sitedata}/>
          <FAQ/>
-        <Testimonials/>
+        <Testimonials sitedata={sitedata}/>
       
         <BlogsSection blogs={blogs}/>
 

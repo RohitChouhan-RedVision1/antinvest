@@ -62,7 +62,7 @@ export default function Page() {
 
   return (
     <div className="container mx-auto main_section">
-      <div className="lg:px-20 px-3 ">
+      <div className=" ">
         <div className="mb-5 flex justify-between">
           <div className="">
             <h3 className="text-2xl md:text-3xl font-bold uppercase">

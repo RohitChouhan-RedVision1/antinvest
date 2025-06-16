@@ -61,7 +61,7 @@ export default function Page() {
     }, [totalInvestment, investmentDuration, expectedReturn, inflationRate]);
 
     return (
-       <div className="max-w-screen-xl mx-auto py-[30px] lg:py-[60px]">
+       <div className="max-w-screen-xl mx-auto main_section">
          <div className="">
            <div className="mb-5 flex flex-col md:flex-row gap-5 justify-between">
            <h3 className="text-2xl md:text-3xl font-bold uppercase">

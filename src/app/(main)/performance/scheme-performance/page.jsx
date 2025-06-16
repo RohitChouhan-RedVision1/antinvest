@@ -286,7 +286,7 @@ export default function Page() {
     };
 
     return (
-        <div className="container mx-auto main_section">
+        <div className="">
              <div className="flex bg-center bg-no-repeat bg-cover bg-[url('/images/pay-premium/pay-premium.webp')] bg-gray-500 overflow-hidden text-start justify-start items-center h-64">
         <div className="max-w-screen-xl mx-auto">
           <h1 className="text-gray-900 text-3xl md:text-5xl font-bold">

@@ -20,10 +20,11 @@ export default function BlogSection({blogs}) {
                <div class="section-title">
     <h3 class="wow fadeInUp">Our Blog</h3>
     <h2 class="text-anime-style-2" data-cursor="-opaque">
-        Dive into Our Insights on <span>Finance and Consulting</span>
+        Financial  <span>Wisdom & Updates</span>
     </h2>
     <p class="wow fadeInUp" data-wow-delay="0.2s">
-        Explore our blog for expert articles, practical advice, and the latest trends in finance and consulting. We share valuable insights to help you navigate complex financial landscapes and make informed decisions.
+       Explore our blog for the latest trends, tips, and expert guidance on mutual funds, investing strategies, and personal finance to empower your financial journey.
+
     </p>
 </div>
 

@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import Image from "next/image";
 
-export function Testimonials() {
+export function Testimonials({sitedata}) {
   const [testimonials, setTestimonials] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedTestimonial, setSelectedTestimonial] = useState(null);
@@ -42,10 +42,10 @@ export function Testimonials() {
               <div className="section-title">
                 <h3 className="wow fadeInUp">Our Testimonial</h3>
                 <h2 className="text-anime-style-2" data-cursor="-opaque">
-                  1250+ Customers Say <span>About Our Finance</span>
+                  Trusted by Over 1,250  <span>Happy Investors</span>
                 </h2>
                 <p className="wow fadeInUp" data-wow-delay="0.2s">
-                  With over 1,250 satisfied clients, our finance and consulting services have earned praise for reliability, personalized guidance, and impactful results.
+                  Join thousands of clients who have grown their wealth and confidence with sitedata?.websiteName expert mutual fund guidance and personalized financial solutions.
                 </p>
               </div>
                <Link href="/contact-us">

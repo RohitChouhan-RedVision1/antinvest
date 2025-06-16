@@ -198,7 +198,7 @@ export default function AdvisorCategory() {
 
           {/* Right - Explore Mutual Funds */}
           <motion.div
-            className="w-full lg:w-1/2 text-white p-6 lg:py-16 rounded-xl"
+            className="w-full lg:w-1/2 text-white p-6 lg:py-12 rounded-xl"
             initial={{ x: 100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
@@ -207,14 +207,12 @@ export default function AdvisorCategory() {
             <div className="section-title dark-section">
               <h3 className="text-anime-style-1">Explore Mutual Funds</h3>
               <h2 className="text-anime-style-2" data-cursor="-opaque">
-                Discover the right{" "}
-                <span className="">investment opportunities</span>
+                Find Investment Opportunities 
+                <span className="">That Match Your Goals</span>
               </h2>
               <p data-aos="fade-up" data-aos-anchor-placement="bottom">
-                Navigate through a wide range of mutual funds tailored to your
-                goals. Whether you're planning for long-term wealth or
-                short-term returns, our platform helps you make informed
-                decisions with expert-backed insights.
+                Browse a curated selection of mutual funds designed to align perfectly with your unique financial objectives and risk appetite. Whether you’re planning for steady, long-term wealth creation or seeking short-term returns, our platform provides expert-backed insights, detailed fund analysis, and easy-to-use tools to help you make informed, confident investment decisions every step of the way.
+
               </p>
               <Link href="/performance/fund-performance">
                 <button className="secondarybutton mt-6">Explore More</button>

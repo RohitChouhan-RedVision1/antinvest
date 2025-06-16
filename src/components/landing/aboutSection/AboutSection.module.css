@@ -18,7 +18,7 @@
 .aboutUsImages {
     position: relative;
     padding: 0 250px 210px 0;
-    background: url('/images/about-img-1.jpg') no-repeat;
+    background: url('/images/about-img-1.webp') no-repeat;
     border-radius: 20px;
 }
 
@@ -108,6 +108,71 @@
 
 .aboutUsContent {
     padding: 20px;
+}
+
+
+ .sectiontitle2 {
+  margin-bottom: 40px;
+}
+
+ .sectiontitle2 h3 {
+  display: inline-block;
+  position: relative;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3em;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rv-secondary);
+  /* padding-left: 34px; */
+  /* margin-bottom: 15px; */
+}
+
+
+
+ .sectiontitle2 h1 {
+  font-size: 70px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0;
+  cursor: none;
+}
+
+ .sectiontitle2 h2 {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.1em;
+  letter-spacing: -0.02em;
+  margin-bottom: 0;
+  color: var(--rv-secondary);
+  cursor: none;
+}
+
+ .sectiontitle2 h1 span,
+ .sectiontitle2 h2 span {
+  color: var(--rv-primary);
+}
+
+ .sectiontitle2 p {
+  margin-top: 20px;
+  margin-bottom: 0;
+  color: var(--rv-secondary);
+
+}
+
+ .sectiontitle2.dark-section h1,
+ .sectiontitle2.dark-section h2,
+ .sectiontitle2.dark-section h3 {
+  color: #ffff;
+}
+
+ .sectiontitle2.dark-section h3::before {
+  filter: brightness(0) invert(1);
+}
+
+ .sectiontitle2.dark-section p {
+  color: #fff;
+  opacity: 80%;
 }
 
 .iconBox {

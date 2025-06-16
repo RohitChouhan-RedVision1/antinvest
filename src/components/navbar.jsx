@@ -135,7 +135,7 @@ export function Navbar({ services }) {
           <Image src="/logo.png" alt="logo" width={200} height={100} />
           </Link>
         </div>
-        <div className="flex-1 max-w-4xl hidden lg:block mx-auto ">
+        <div className="flex-1 max-w-3xl hidden lg:block mx-auto ">
           {isSearchOpen ? (
             <div
               className="relative rounded-full border-2 bg-[var(--rv-white)] border-gray-300 shadow-input flex justify-center"
@@ -189,6 +189,7 @@ export function Navbar({ services }) {
           ) : (
             <Menu setActive={setActive}>
               <HoveredLink href="/">Home</HoveredLink>
+              <HoveredLink href="/about-us">About Us</HoveredLink>
               <MenuItem setActive={setActive} active={active} item="Services">
                 <div className="flex flex-col space-y-4 text-sm">
                   {services.map((service, index) => (
@@ -228,7 +229,7 @@ export function Navbar({ services }) {
                 </div>
               </MenuItem> */}
               <HoveredLink href="/blogs">Blogs</HoveredLink>
-              <HoveredLink href="/about-us">About Us</HoveredLink>
+
               <HoveredLink href="/contact-us">Contact Us</HoveredLink>
               <button
                 onClick={toggleSearch}
@@ -254,7 +255,7 @@ export function Navbar({ services }) {
         </div>
         <Link href="/login">
         <button className="primarybutton hidden lg:block">
-          Login
+          Signup /Login
         </button></Link>
         <div className="flex items-center gap-4 lg:hidden">
           {/* Search Icon */}

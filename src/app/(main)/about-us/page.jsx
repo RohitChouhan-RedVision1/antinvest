@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { FaRegCheckCircle } from "react-icons/fa";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import AboutSection from "@/components/landing/aboutSection/aboutSection";
+import WhyChooseUs from "@/components/landing/whytochoose";
 
 export function generatemetadata() {
   return {
@@ -28,7 +30,7 @@ export default function AboutUs() {
     };
     getData();
   }, []);
-  console.log(siteSettings);
+
   return (
     <div className="">
       {/* Hero Section */}
@@ -40,6 +42,7 @@ export default function AboutUs() {
         </div>
       </div>
 
+<AboutSection sitedata={siteSettings}/>
       {/* Introduction Section */}
       <motion.section
         initial={{ opacity: 0 }}
@@ -47,7 +50,7 @@ export default function AboutUs() {
         transition={{ duration: 1, delay: 0.2 }}
         className="main_section md:px-0 px-3"
       >
-        <h2 className="text-4xl text-[var(--rv-primary)] md:text-5xl font-bold mb-6 text-center">
+        {/* <h2 className="text-4xl text-[var(--rv-primary)] md:text-5xl font-bold mb-6 text-center">
           About Us
         </h2>
         <p className="text-gray-800 max-w-5xl mx-auto text-center mb-5">
@@ -56,7 +59,7 @@ export default function AboutUs() {
           Our Expertise is in "Need Base Financial Planning" which helps our
           customers to achieve their Financial Goals with proper Risk
           Management.
-        </p>
+        </p> */}
 
         {/* Top Features Section */}
         <h3 className="text-3xl text-center font-semibold text-[var(--rv-primary)] mb-6">
@@ -81,6 +84,8 @@ export default function AboutUs() {
         </div>
       </motion.section>
 
+      
+
       <div className="bg-[var(--rv-secondary)]">
         <div className="max-w-screen-xl mx-auto main_section md:px-0 px-3">
           {/* Transforming Ambitions Section */}
@@ -92,7 +97,7 @@ export default function AboutUs() {
           >
             <div className="relative">
               <Image
-                src="/images/aboutus/aboutuss.webp"
+                src="/images/about-us.webp"
                 alt="About Us"
                 width={550}
                 height={550}
@@ -118,6 +123,8 @@ export default function AboutUs() {
           </motion.section>
         </div>
       </div>
+
+      <WhyChooseUs sitedata={siteSettings}/>
 
       <div className="max-w-screen-xl mx-auto main_section md:px-0 px-3">
         {/* Mission, Vision, Value Section */}
@@ -183,6 +190,8 @@ export default function AboutUs() {
           </ul>
         </motion.section>
       </div>
+
+      
 
       <div className="bg-[var(--rv-secondary)]">
         <div className="max-w-screen-xl mx-auto main_section md:px-0 px-3">

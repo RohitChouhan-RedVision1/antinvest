@@ -24,13 +24,8 @@ export default function Page() {
           </h1>
         </div>
       </div>
-      <div className="max-w-screen-xl mx-auto py-[30px] lg:py-[60px]">
+      <div className="max-w-screen-xl mx-auto main_section">
       <section className="">
-        <div className="page-header">
-          <div className="">
-            
-          </div>
-        </div>
         <div className=" mx-auto">
         <div className="flex justify-center mb-14">
   <div className="inline-flex border border-[var(--primary)] rounded-full shadow-inner">

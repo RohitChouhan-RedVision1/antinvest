@@ -30,8 +30,8 @@ const SinglePostPage = async ({ params }) => {
     }
   
     return (
-      <div className="max-w-screen-xl mx-auto">
-        <div className="flex  py-10 flex-col">
+      <div className="max-w-screen-xl mx-auto main_section">
+        <div className="flex  flex-col">
           <div className="text-left">
             <div className="mb-16">
               <h1 className="text-5xl font-bold text-gray-800 mb-5">{post?.posttitle}</h1>

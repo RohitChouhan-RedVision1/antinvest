@@ -10,21 +10,19 @@ import { Autoplay } from "swiper/modules";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-const OurServices = ({ services }) => {
+const OurServices = ({ services,sitedata }) => {
   return (
     <div className={`${styles.serviceSectionArea} main_section`}>
       <div class="max-w-screen-xl mx-auto px-2 lg:px-0">
-        <div className="w-full lg:w-[70%]">
-          <div className="section-title">
+        <div className="w-full ">
+          <div className="section-title text-center">
             <h3 className="text-anime-style-1">our services</h3>
             <h2 className="text-anime-style-2" data-cursor="-opaque">
-              Explore <span className="">diverse financial solutions</span>
+              Smart Services to Build, Manage & Grow <span className="">Your Wealth</span>
             </h2>
             <p data-aos="fade-up" data-aos-anchor-placement="bottom">
-              Discover a range of services designed to support your financial
-              journey — from investments to loans, credit sourcing, and more.
-              Our expert guidance ensures you make informed and confident
-              financial decisions.
+              At <strong>{sitedata.websiteName}</strong>, we go beyond mutual fund investments to offer a complete suite of financial services designed to support your life goals. Whether you're growing your savings, improving your credit, or seeking funding, our expert team is here to guide you every step of the way.
+
             </p>
           </div>
         </div>
@@ -67,6 +65,8 @@ const OurServices = ({ services }) => {
                       </div>
                       <div class="space24"></div>
                       <h3>{service?.name}</h3>
+                      <div class="space24"></div>
+                      <p className="line-clamp-2">{service?.description}</p>
                     </div>
                   </div>
                 </Link>

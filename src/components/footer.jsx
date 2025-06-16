@@ -73,8 +73,38 @@ const Footer = ({ sitedata, servicedata, arn, socialmedialinks }) => {
               className="p-4 bg-white rounded-[10px]"
             />
             <p className="mt-2 text-gray-50 py-4 text-justify">
-              Our journey began with a simple promise to empower every individual in India to achieve their financial goals and protect what matters most. We know that life's uncertainties can be overwhelming, but with the right guidance and support, you can navigate them successfully.
+              {sitedata?.websiteName} is dedicated to empowering individuals across India to achieve their financial goals and protect what matters most. With expert guidance and support, we help you confidently navigate life’s financial uncertainties.
+
             </p>
+            <div className="flex flex-col  py-3  gap-5">
+          
+          <Link  href={"https://play.google.com/store/apps/details?id=com.nine15fintech.nine15"} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+          <button
+            className="text-white text-2xl font-semibold px-10 py-6 rounded-2xl cursor-pointer"
+            style={{
+              backgroundImage: `url(/Playstore.png)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              minWidth: "200px", // Ensures button width increases
+            }}
+          >
+            
+          </button>
+        </Link>
+        <Link  href={"https://apps.apple.com/us/app/nine15-fintech/id6746642805"} target="_blank" rel="noopener noreferrer" className="cursor-pointer ">
+          <button
+            className="text-white text-2xl font-semibold px-10 py-6 rounded-2xl cursor-pointer"
+            style={{
+              backgroundImage: `url(/Appstore.png)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              minWidth: "200px", // Ensures button width increases
+            }}
+          >
+            
+          </button>
+        </Link>
+         </div>
           </div>
           <div className="text-gray-50 md:pl-10">
             <h4 className="mb-5 font-bold">Services</h4>
@@ -176,6 +206,8 @@ const Footer = ({ sitedata, servicedata, arn, socialmedialinks }) => {
                 </div>
               </li>
             </ul>
+
+           
           </div>
         </div>
         <div className="flex gap-x-3 justify-center py-3">

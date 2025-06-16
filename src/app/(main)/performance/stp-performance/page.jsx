@@ -15,40 +15,13 @@ import { toast } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { FaFilePdf } from "react-icons/fa6";
 import { generatePDF } from "@/lib/generatePdf";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@/components/ui/input";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@radix-ui/react-label";
 import { StpPerformanceChart } from "@/components/charts/stpPerformanceChart";
 import StpPerformanceTofundTable from "@/components/stpPerformanceTofundTable";
 import StpPerformanceFromfundTable from "@/components/stpPerformanceFromfundTable";
 
+
 export default function Page() {
   const [loading, setLoading] = useState(false);
-  const FormSchema = z.object({
-    username: z
-      .string()
-      .min(2, { message: "Username must be at least 2 characters." }),
-    mobile: z.string().nonempty({ message: "Mobile number is required." }),
-    email: z.string().email({ message: "Invalid email address." }),
-  });
   function getTodayDate() {
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -74,53 +47,9 @@ export default function Page() {
   const [viewby, setViewBy] = useState("graph");
   const [assetCategory, setAssetCategory] = useState([]);
   const [selectedAssets, setSelectedAssets] = useState(new Set());
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [graphData, setGraphData] = useState(false);
-
-  const form = useForm({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      username: "",
-      mobile: "",
-      email: "",
-      message: "",
-    },
-  });
-
-  // Handle form submission
-  const onSubmit = async (data) => {
-    setLoading(true);
-    const emaildata = {
-      user: data?.username,
-      to: data?.email,
-      subject: "Test Email",
-      text: "This is a test email sent from Nodemailer!",
-    };
-
-    try {
-      const response = await axios.post("/api/leads/", data);
-      const info = await axios.post("/api/email/", emaildata);
-      if (response.status === 201) {
-        toast({
-          description: "Your message has been sent.",
-        });
-        form.reset();
-      } else {
-        alert(response.statusText);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("An unexpected error occurred.");
-    }
-    localStorage.setItem("formSubmitted", "true");
-    localStorage.setItem("submissionTimestamp", Date.now().toString());
-    setIsModalOpen(false);
-    setLoading(false);
-    setIsSubmitted(true);
-    setGraphData(true);
-    haldleSubmit();
-  };
+  const [siteData, setSiteData] = useState([]);
 
   // Constants for time calculations
   const TWENTY_DAYS_IN_MS = 15 * 24 * 60 * 60 * 1000; // 15 days in milliseconds
@@ -271,11 +200,11 @@ export default function Page() {
             },
           }
         );
-        if (response.data.data == null) {
-          setGraphData(false);
-        } else {
+        if (response.data.data.sipData) {
           setGraphData(true);
           setResult(response.data.data);
+        } else {
+          setGraphData(false);
         }
       } catch (error) {
         console.error("Error fetching schemes data:", error);
@@ -283,610 +212,639 @@ export default function Page() {
     }
   };
 
-  const handlePdf = async (result, title, startsipDate, valuationDate) => {
-    generatePDF(result, title, startsipDate, valuationDate, "graphId");
-  };
+  useEffect(() => {
+    const fetchSiteData = async () => {
+      const res = await fetch("/api/admin/site-settings");
+      if (res.ok) {
+        const data = await res.json();
+        setSiteData(data[0]);
+      } else {
+        console.error("Failed to fetch site settings");
+      }
+    };
+    fetchSiteData();
+  }, []);
 
-  const handleModelOpen = (open) => {
-    // Check if no schemes are selected
-    if (selectedAcms.length === 0 && selectedAssets.size === 0) {
-      toast({
-        variant: "destructive",
-        title: "Please select scheme",
-      });
-    } else {
-      setIsModalOpen((prevState) => !prevState);
-    }
+  const handlePdf = async (result, title, startsipDate, valuationDate) => {
+    generatePDF(result, title, startsipDate, valuationDate, "graphId", siteData);
   };
 
   return (
     <div className="">
-       <div className="flex bg-center bg-no-repeat bg-cover bg-[url('/images/pay-premium/pay-premium.webp')] bg-gray-500 overflow-hidden text-start justify-start items-center h-64">
+      {/* <Banner title={"STP Performance"} /> */}
+      <div className="flex bg-center bg-no-repeat bg-cover bg-[url('/images/pay-premium/pay-premium.webp')] bg-gray-500 overflow-hidden text-start justify-start items-center h-64">
         <div className="max-w-screen-xl mx-auto">
           <h1 className="text-gray-900 text-3xl md:text-5xl font-bold">
-          SIP Performance
+          STP Performance
           </h1>
         </div>
       </div>
-      <div className="max-w-screen-xl mx-auto main_section ">
-      <Toaster />
-      
-      <div>
+      <div className="max-w-screen-xl mx-auto main_section lg:px-1 px-3">
+        <Toaster />
         <div>
-          <div className="col-span-1 border border-gray-200 rounded-2xl bg-white p-2 mb-3">
-            <div className="sip-calculator container mx-auto p-3 sticky top-0 z-10">
-              {/* Investment Type Toggle */}
-              <div className="flex space-x-4 mb-8">
-                <Button
-                  onClick={() => (
-                    setIsMonthlySip(true),
-                    setSchemesData([]),
-                    setGraphData(false)
-                  )}
-                  className={`text-sm rounded-full hover:bg-[var(--rv-primary)] ${
-                    isMonthlySip
+          <div>
+            <div className="col-span-1 border border-gray-200 rounded-2xl bg-white p-2 mb-3">
+              <div className="sip-calculator container mx-auto p-3 sticky top-0 z-10">
+                {/* Investment Type Toggle */}
+                <div className="flex space-x-4 mb-8">
+                  <Button
+                    onClick={() => (
+                      setIsMonthlySip(true),
+                      setSchemesData([]),
+                      setGraphData(false)
+                    )}
+                    className={`text-sm rounded-full hover:bg-[var(--rv-primary)] hover:text-white ${isMonthlySip
                       ? "bg-[var(--rv-secondary)] text-white"
                       : "bg-[var(--rv-primary)] text-white "
-                  }`}
-                >
-                  Fund House
-                </Button>
-                <Button
-                  onClick={() => (
-                    setIsMonthlySip(false),
-                    setSchemesData([]),
-                    setGraphData(false)
-                  )}
-                  className={`text-sm rounded-full hover:bg-[var(--rv-primary)] ${
-                    !isMonthlySip
+                      }`}
+                  >
+                    Fund House
+                  </Button>
+                  <Button
+                    onClick={() => (
+                      setIsMonthlySip(false),
+                      setSchemesData([]),
+                      setGraphData(false)
+                    )}
+                    className={`text-sm rounded-full hover:bg-[var(--rv-primary)] hover:text-white ${!isMonthlySip
                       ? "bg-[var(--rv-secondary)] text-white"
                       : "bg-[var(--rv-primary)] text-white"
-                  }`}
-                >
-                  Asset Category
+                      }`}
+                  >
+                    Asset Category
+                  </Button>
+                </div>
+                <div className="input-fields mt-5 mb-5">
+                  {isMonthlySip ? (
+                    <div className="w-full">
+                      <h2 className="font-semibold text-gray-700">Select ACM</h2>
+                      <div className="max-w-full mt-2 border border-gray-300 p-3 rounded h-60 overflow-y-auto">
+                        <input
+                          type="text"
+                          placeholder="Search Scheme"
+                          className="w-full px-3 py-2 border rounded mb-1"
+                        />
+                        {/* Render checkboxes for each AMC */}
+                        {allAcmdata?.map((scheme, index) => (
+                          <div key={index} className="flex items-center mb-1">
+                            <input
+                              type="checkbox"
+                              id={`acm-${index}`}
+                              checked={selectedAcms.includes(scheme)}
+                              onChange={() => handleAcmSelect(scheme)}
+                              className="mr-2"
+                            />
+                            <label
+                              htmlFor={`acm-${index}`}
+                              className="text-stone-900 text-sm"
+                            >
+                              {scheme?.funddes}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-4">
+                      <div>
+                        <p className="font-semibold text-gray-700">
+                          Select Equity Funds
+                        </p>
+                        {console.log(assetCategory)}
+                        <div className="mt-2 border border-gray-300 p-3 rounded h-60 overflow-y-auto">
+                          {/* Equity Funds checkboxes here */}
+                          {assetCategory
+                            ?.filter((item) => item.nav_c2 === "Equity")
+                            .map((scheme, index) => (
+                              <div key={index} className="flex items-center mb-1">
+                                <input
+                                  type="checkbox"
+                                  id={`asset-equity-${index}`}
+                                  checked={selectedAssets.has(
+                                    scheme.assets_class
+                                  )}
+                                  onChange={() => handleAssetSelect(scheme)}
+                                  className="mr-2"
+                                />
+                                <label
+                                  htmlFor={`asset-equity-${index}`}
+                                  className="text-stone-900 text-sm"
+                                >
+                                  Equity - {scheme?.assets_class}
+                                </label>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-700">
+                          Select Debt Funds
+                        </p>
+                        <div className="mt-2 border border-gray-300 p-3 rounded h-60 overflow-y-auto">
+                          {assetCategory
+                            ?.filter((item) => item.nav_c2 === "Debt")
+                            .map((scheme, index) => (
+                              <div key={index} className="flex items-center mb-1">
+                                <input
+                                  type="checkbox"
+                                  id={`asset-debt-${index}`}
+                                  checked={selectedAssets.has(
+                                    scheme.assets_class
+                                  )}
+                                  onChange={() => handleAssetSelect(scheme)}
+                                  className="mr-2"
+                                />
+                                <label
+                                  htmlFor={`asset-debt-${index}`}
+                                  className="text-stone-900 text-sm"
+                                >
+                                  Debt - {scheme?.assets_class}
+                                </label>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-700">
+                          Select Hybrid Funds
+                        </p>
+                        <div className="mt-2 border border-gray-300 p-3 rounded h-60 overflow-y-auto">
+                          {/* Hybrid Funds checkboxes here */}
+                          {assetCategory
+                            ?.filter((item) => item.nav_c2 === "Hybrid")
+                            .map((scheme, index) => (
+                              <div key={index} className="flex items-center mb-1">
+                                <input
+                                  type="checkbox"
+                                  id={`asset-hybrid-${index}`}
+                                  checked={selectedAssets.has(
+                                    scheme.assets_class
+                                  )}
+                                  onChange={() => handleAssetSelect(scheme)}
+                                  className="mr-2"
+                                />
+                                <label
+                                  htmlFor={`asset-hybrid-${index}`}
+                                  className="text-stone-900 text-sm"
+                                >
+                                  Hybrid - {scheme?.assets_class}
+                                </label>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-700">
+                          Select Commodity Funds/ Others
+                        </p>
+                        <div className="mt-2 border border-gray-300 p-3 rounded h-60 overflow-y-auto">
+                          {assetCategory
+                            ?.filter(
+                              (item) =>
+                                item.nav_c2 === "Other " ||
+                                item.nav_c2 === "Others" ||
+                                item.nav_c2 === "Sol Oriented"
+                            )
+                            .map((scheme, index) => (
+                              <div key={index} className="flex items-center mb-1">
+                                <input
+                                  type="checkbox"
+                                  id={`asset-other-${index}`}
+                                  checked={selectedAssets.has(
+                                    scheme.assets_class
+                                  )}
+                                  onChange={() => handleAssetSelect(scheme)}
+                                  className="mr-2"
+                                />
+                                <label
+                                  htmlFor={`asset-other-${index}`}
+                                  className="text-stone-900 text-sm"
+                                >
+                                  Other - {scheme?.assets_class}
+                                </label>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <hr />
+                <div className="grid grid-cols-1 lg:grid-cols-6">
+                  <div className="col-span-2 mt-2 overflow-y-auto p-2">
+                    {/* Dropdown for selecting a scheme */}
+                    <div className="mb-4">
+                      <label
+                        htmlFor="schemeSelect"
+                        className="text-sm block font-semibold text-gray-700 mb-1"
+                      >
+                        Transfer From Scheme
+                      </label>
+                      <select
+                        id="schemeSelect"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        onChange={(e) => {
+                          const selectedScheme = schemesData?.data.find(
+                            (scheme) => scheme.funddes === e.target.value
+                          );
+                          setPcode(selectedScheme?.pcode);
+                          setTitle(selectedScheme?.funddes);
+                        }}
+                      >
+                        <option value="" selected>
+                          Choose a scheme
+                        </option>
+                        {!isMonthlySip ?
+                          schemesData
+                            ? schemesData &&
+                            schemesData?.data?.map((scheme, index) => (
+                              <option key={index} value={scheme?.funddes}>
+                                {scheme?.funddes}
+                              </option>
+                            ))
+                            : "Loading..."
+                          :
+                          selectedAcms &&
+                            selectedAcms.length > 0 &&
+                            schemesData?.data ? (
+                            schemesData.data
+                              .filter((scheme) =>
+                                selectedAcms.some(
+                                  (acm) => acm.fund === scheme.fund
+                                )
+                              )
+                              .map((scheme, index) => (
+                                <option key={index} value={scheme.funddes}>
+                                  {scheme.funddes}
+                                </option>
+                              ))
+                          ) : (
+                            <option disabled>Loading...</option>
+                          )}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-span-2 mt-2 overflow-y-auto p-2">
+                    {/* Dropdown for selecting a scheme */}
+                    <div className="mb-4">
+                      <label
+                        htmlFor="schemeSelect"
+                        className="text-sm block font-semibold text-gray-700 mb-1"
+                      >
+                        Transfer To Scheme
+                      </label>
+                      <select
+                        id="schemeSelect"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        onChange={(e) => {
+                          const selectedScheme = schemesData?.data.find(
+                            (scheme) => scheme.funddes === e.target.value
+                          );
+                          setTofundPcode(selectedScheme?.pcode);
+                          setDestinationTitle(selectedScheme?.funddes);
+                        }}
+                      >
+                        <option value="" selected>
+                          Choose a scheme
+                        </option>
+                        {!isMonthlySip ?
+                          schemesData
+                            ? schemesData &&
+                            schemesData?.data?.map((scheme, index) => (
+                              <option key={index} value={scheme?.funddes}>
+                                {scheme?.funddes}
+                              </option>
+                            ))
+                            : "Loading..."
+                          :
+                          selectedAcms &&
+                            selectedAcms.length > 0 &&
+                            schemesData?.data ? (
+                            schemesData.data
+                              .filter((scheme) =>
+                                selectedAcms.some(
+                                  (acm) => acm.fund === scheme.fund
+                                )
+                              )
+                              .map((scheme, index) => (
+                                <option key={index} value={scheme.funddes}>
+                                  {scheme.funddes}
+                                </option>
+                              ))
+                          ) : (
+                            <option disabled>Loading...</option>
+                          )}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-5">
+                  <div className="col-span-1 mt-2 overflow-y-auto p-2">
+                    {/* Text input for scheme name */}
+                    <div className="mb-4">
+                      <label
+                        htmlFor="schemeName"
+                        className="text-sm block font-semibold text-gray-700 mb-1"
+                      >
+                        Initial Amount
+                      </label>
+                      <input
+                        type="number"
+                        id="schemeName"
+                        placeholder="Enter scheme name"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        value={initialAmount}
+                        onChange={(e) => setInitialAmount(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-1 mt-2 overflow-y-auto p-2">
+                    {/* Text input for scheme name */}
+                    <div className="mb-4">
+                      <label
+                        htmlFor="schemeName"
+                        className="text-sm block font-semibold text-gray-700 mb-1"
+                      >
+                        Transfer Amount
+                      </label>
+                      <input
+                        type="number"
+                        id="schemeName"
+                        placeholder="Enter scheme name"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        value={transferAmount}
+                        onChange={(e) => setTransferAmount(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  {/* Date input for selecting a date */}
+                  <div className="col-span-1 mt-2 overflow-y-auto p-2">
+                    <div className="mb-4">
+                      <label
+                        htmlFor="schemeDate"
+                        className="text-sm block font-semibold text-gray-700 mb-1"
+                      >
+                        Investment Date
+                      </label>
+                      <input
+                        type="date"
+                        id="schemeDate"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        min={endsipDate}
+                        max={getTodayDate()}
+                        value={valuationDate}
+                        onChange={(e) => setValuationDate(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  {/* Date input for selecting a date */}
+                  <div className="col-span-1 mt-2 overflow-y-auto p-2">
+                    <div className="mb-4">
+                      <label
+                        htmlFor="schemeDate"
+                        className="text-sm block font-semibold text-gray-700 mb-1"
+                      >
+                        SWP Start Date
+                      </label>
+                      <input
+                        type="date"
+                        id="schemeDate"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        value={startsipDate}
+                        onChange={(e) => setStartSipDate(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  {/* Date input for selecting a date */}
+                  <div className="col-span-1 mt-2 overflow-y-auto p-2">
+                    <div className="mb-4">
+                      <label
+                        htmlFor="schemeDate"
+                        className="text-sm block font-semibold text-gray-700 mb-1"
+                      >
+                        SWP End Date
+                      </label>
+                      <input
+                        type="date"
+                        id="schemeDate"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        min={startsipDate}
+                        value={endsipDate}
+                        onChange={(e) => setEndSipDate(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <Button className="bg-[var(--rv-secondary)] text-white hover:text-white disabled:opacity-50 hover:bg-[var(--rv-primary)]" onClick={() => haldleSubmit()}>
+                  Show
                 </Button>
               </div>
-
-              <div className="input-fields mt-5 mb-5">
-                {isMonthlySip ? (
-                  <div className="w-full">
-                    <h1 className="font-semibold text-gray-700">Select ACM</h1>
-                    <div className="max-w-full mt-2 border border-gray-300 p-3 rounded h-60 overflow-y-auto">
-                      <input
-                        type="text"
-                        placeholder="Search Scheme"
-                        className="w-full px-3 py-2 border rounded mb-1"
-                      />
-                      {/* Render checkboxes for each AMC */}
-                      {allAcmdata?.map((scheme, index) => (
-                        <div key={index} className="flex items-center mb-1">
-                          <input
-                            type="checkbox"
-                            id={`acm-${index}`}
-                            checked={selectedAcms.includes(scheme)}
-                            onChange={() => handleAcmSelect(scheme)}
-                            className="mr-2"
-                          />
-                          <label
-                            htmlFor={`acm-${index}`}
-                            className="text-stone-900 text-sm"
-                          >
-                            {scheme?.funddes}
-                          </label>
-                        </div>
-                      ))}
+            </div>
+            <div className="col-span-1">
+              {graphData && (
+                <div className="mb-5 flex justify-between">
+                  <div className="space-x-2">
+                    <Button
+                      variant="outline"
+                      className={`border-2 ${viewby === "graph" ? "border-blue-600" : "border-gray-600"
+                        } uppercase font-semibold text-gray-800`}
+                      onClick={() => setViewBy("graph")}
+                    >
+                      Graph
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className={`border-2 ${viewby === "table" ? "border-blue-600" : "border-gray-600"
+                        } uppercase font-semibold text-gray-800`}
+                      onClick={() => setViewBy("table")}
+                    >
+                      Table
+                    </Button>
+                  </div>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() =>
+                      handlePdf(
+                        result.resData,
+                        title,
+                        startsipDate,
+                        valuationDate
+                      )
+                    }
+                  >
+                    <h1 className="text-2xl">
+                      <FaFilePdf />
+                    </h1>
+                  </div>
+                </div>
+              )}
+              {graphData ? (
+                <div>
+                  <h3 className="text-center text-gray-700">Source Fund</h3>
+                  <h4 className="text-center font-semibold text-gray-700 mb-3">
+                    {title}
+                  </h4>
+                  <div className="grid lg:grid-cols-6 md:grid-cols-3 mb-7 gap-4">
+                    <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
+                      <h3 className="font-semibold text-gray-800 text-sm">
+                        Amount Invested
+                      </h3>
+                      <h4 className="font-medium text-gray-900 text-sm">
+                        {result?.withdrawlingScheme?.initialAmount}
+                      </h4>
                     </div>
+                    <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
+                      <h1 className="font-semibold text-gray-800 text-sm">
+                        MONTHLY TRANSFER
+                      </h1>
+                      <h1 className="font-medium text-gray-900 text-sm">
+                        {transferAmount}
+                      </h1>
+                    </div>
+                    <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
+                      <h1 className="font-semibold text-gray-800 text-sm">
+                        TOTAL TRANSFER
+                      </h1>
+                      <h1 className="font-medium text-gray-900 text-sm">
+                        {result?.withdrawlingScheme?.totalWithdrawlAmount}
+                      </h1>
+                    </div>
+                    <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
+                      <h1 className="font-semibold text-gray-800 text-sm">
+                        SOURCE FUND BALANCE
+                      </h1>
+                      <h1 className="font-medium text-gray-900 text-sm">
+                        {result?.withdrawlingScheme?.fundRemaining}
+                      </h1>
+                    </div>
+                    <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
+                      <h1 className="font-semibold text-gray-800 text-sm">
+                        TRANSFERRED AMOUNT + BALANCE VALUE
+                      </h1>
+                      <h1 className="font-medium text-gray-900 text-sm">
+                        {result?.withdrawlingScheme?.portFolioValue}
+                      </h1>
+                    </div>
+                    <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
+                      <h1 className="font-semibold text-gray-800 text-sm">
+                        XIRR (%)
+                      </h1>
+                      <h1 className="font-medium text-gray-900 text-sm">
+                        {result?.withdrawlingScheme.xirrRate}
+                      </h1>
+                    </div>
+                  </div>
+
+                  <h3 className="text-center text-gray-700">Destination Fund</h3>
+                  <h4 className="text-center font-semibold text-gray-700 mb-3">
+                    {destinationTitle}
+                  </h4>
+                  <div className="grid lg:grid-cols-6 md:grid-cols-3 mb-7 gap-4">
+                    <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
+                      <h1 className="font-semibold text-gray-800 text-sm">
+                        INSTALLMENT AMOUNT
+                      </h1>
+                      <h1 className="font-medium text-gray-900 text-sm">
+                        {
+                          result?.investedScheme?.DestinationFundValuation?.installmentAmount
+                        }
+                      </h1>
+                    </div>
+                    <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
+                      <h1 className="font-semibold text-gray-800 text-sm">
+                        AMOUNT TRANSFERRED FOR MONTH
+                      </h1>
+                      <h1 className="font-medium text-gray-900 text-sm">
+                        {
+                          result?.investedScheme?.DestinationFundValuation?.amountTransferFormonth
+                        }
+                      </h1>
+                    </div>
+                    <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
+                      <h1 className="font-semibold text-gray-800 text-sm">
+                        AMOUNT INVESTED
+                      </h1>
+                      <h1 className="font-medium text-gray-900 text-sm">
+                        {
+                          result?.investedScheme?.DestinationFundValuation?.amountInvested
+                        }
+                      </h1>
+                    </div>
+                    <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
+                      <h1 className="font-semibold text-gray-800 text-sm">
+                        VALUATION ON MATURITY
+                      </h1>
+                      <h1 className="font-medium text-gray-900 text-sm">
+                        {
+                          result?.investedScheme?.DestinationFundValuation?.valuationAsOnMaturity
+                        }
+                      </h1>
+                    </div>
+                    <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
+                      <h1 className="font-semibold text-gray-800 text-sm">
+                        ABSOLUTE RETURN (%)
+                      </h1>
+                      <h1 className="font-medium text-gray-900 text-sm">
+                        {
+                          result?.investedScheme?.DestinationFundValuation?.absoluteReturns
+                        }
+                      </h1>
+                    </div>
+                    <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
+                      <h1 className="font-semibold text-gray-800 text-sm">
+                        XIRR (%)
+                      </h1>
+                      <h1 className="font-medium text-gray-900 text-sm">
+                        {
+                          result?.investedScheme?.DestinationFundValuation?.xirrRate
+                        }
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+              ): (
+                <div>No Data Found</div>
+              )}
+              {result ? (
+                viewby === "graph" ? (
+                  <div id="graphId">
+                    {graphData && (
+                      <StpPerformanceChart
+                        piedata={result}
+                        startDate={startsipDate}
+                        endDate={endsipDate}
+                        title={title}
+                        withdrawal={transferAmount}
+                      />
+                    )}
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2  gap-x-4 gap-y-4">
-                    <div>
-                      <h1 className="font-semibold text-gray-700">
-                        Select Equity Funds
-                      </h1>
-                      <div className="mt-2 border border-gray-300 p-3 rounded h-60 overflow-y-auto">
-                        {/* Render checkboxes for each */}
-                        {assetCategory
-                          ?.filter((item) => item.nav_c2 === "Equity")
-                          .map((scheme, index) => (
-                            <div key={index} className="flex items-center mb-1">
-                              <input
-                                type="checkbox"
-                                id={`asset-${index}`}
-                                checked={selectedAssets.has(
-                                  scheme.assets_class
-                                )}
-                                onChange={() => handleAssetSelect(scheme)}
-                                className="mr-2"
-                              />
-                              <label
-                                htmlFor={`asset-${index}`}
-                                className="text-stone-900 text-sm"
-                              >
-                                Equity - {scheme?.assets_class}
-                              </label>
-                            </div>
-                          ))}
-                      </div>
-                    </div>
-                    <div>
-                      <h1 className="font-semibold text-gray-700">
-                        Select Debt Funds
-                      </h1>
-                      <div className="mt-2 border border-gray-300 p-3 rounded h-60 overflow-y-auto">
-                        {/* Render checkboxes for each AMC */}
-                        {assetCategory
-                          ?.filter((item) => item.nav_c2 === "Debt")
-                          .map((scheme, index) => (
-                            <div key={index} className="flex items-center mb-1">
-                              <input
-                                type="checkbox"
-                                id={`asset-${index}`}
-                                checked={selectedAssets.has(
-                                  scheme.assets_class
-                                )}
-                                onChange={() => handleAssetSelect(scheme)}
-                                className="mr-2"
-                              />
-                              <label
-                                htmlFor={`asset-${index}`}
-                                className="text-stone-900 text-sm"
-                              >
-                                Debt - {scheme?.assets_class}
-                              </label>
-                            </div>
-                          ))}
-                      </div>
-                    </div>
-                    <div>
-                      <h1 className="font-semibold text-gray-700">
-                        Select Hybrid Funds
-                      </h1>
-                      <div className="mt-2 border border-gray-300 p-3 rounded h-60 overflow-y-auto">
-                        {/* Render checkboxes for each AMC */}
-                        {assetCategory
-                          ?.filter((item) => item.nav_c2 === "Hybrid")
-                          .map((scheme, index) => (
-                            <div key={index} className="flex items-center mb-1">
-                              <input
-                                type="checkbox"
-                                id={`asset-${index}`}
-                                checked={selectedAssets.has(
-                                  scheme.assets_class
-                                )}
-                                onChange={() => handleAssetSelect(scheme)}
-                                className="mr-2"
-                              />
-                              <label
-                                htmlFor={`asset-${index}`}
-                                className="text-stone-900 text-sm"
-                              >
-                                Hybrid - {scheme?.assets_class}
-                              </label>
-                            </div>
-                          ))}
-                      </div>
-                    </div>
-                    <div>
-                      <h1 className="font-semibold text-gray-700">
-                        Select Commodity Funds/ Others
-                      </h1>
-                      <div className="mt-2 border border-gray-300 p-3 rounded h-60 overflow-y-auto">
-                        {/* Render checkboxes for each AMC */}
-                        {assetCategory
-                          ?.filter(
-                            (item) =>
-                              item.nav_c2 === "Other " ||
-                              item.nav_c2 === "Others" ||
-                              item.nav_c2 === "Sol Oriented"
-                          )
-                          .map((scheme, index) => (
-                            <div key={index} className="flex items-center mb-1">
-                              <input
-                                type="checkbox"
-                                id={`asset-${index}`}
-                                checked={selectedAssets.has(
-                                  scheme.assets_class
-                                )}
-                                onChange={() => handleAssetSelect(scheme)}
-                                className="mr-2"
-                              />
-                              <label
-                                htmlFor={`asset-${index}`}
-                                className="text-stone-900 text-sm"
-                              >
-                                Other - {scheme?.assets_class}
-                              </label>
-                            </div>
-                          ))}
-                      </div>
-                    </div>
+                  <div className="border border-gray-200 rounded-2xl p-5">
+                    <h3 className="text-center text-gray-700">Source Fund</h3>
+                    <h4 className="text-center font-semibold text-gray-700 mb-3">
+                      {title}
+                    </h4>
+                    {graphData && (
+                      <StpPerformanceTofundTable data={result} title={title} />
+                    )}
+                    <h3 className="text-center text-gray-700">
+                      Destination Fund
+                    </h3>
+                    <h4 className="text-center font-semibold text-gray-700 mb-3">
+                      {destinationTitle}
+                    </h4>
+                    {graphData && (
+                      <StpPerformanceFromfundTable data={result} title={title} />
+                    )}
                   </div>
-                )}
-              </div>
-              <hr />
-              <div className="grid grid-cols-1 lg:grid-cols-6">
-                <div className="col-span-2 mt-2 overflow-y-auto p-2">
-                  {/* Dropdown for selecting a scheme */}
-                  <div className="mb-4">
-                    <label
-                      htmlFor="schemeSelect"
-                      className="text-sm block font-semibold text-gray-700 mb-1"
-                    >
-                      Transfer From Scheme
-                    </label>
-                    <select
-                      id="schemeSelect"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                      onChange={(e) => {
-                        const selectedScheme = schemesData?.data.find(
-                          (scheme) => scheme.funddes === e.target.value
-                        );
-                        setPcode(selectedScheme?.pcode);
-                        setTitle(selectedScheme?.funddes);
-                      }}
-                    >
-                      <option value="" selected>
-                        Choose a scheme
-                      </option>
-                      {schemesData.data
-                        ? schemesData &&
-                          schemesData?.data?.map((scheme, index) => (
-                            <option key={index} value={scheme?.funddes}>
-                              {scheme?.funddes}
-                            </option>
-                          ))
-                        : "Loading..."}
-                    </select>
-                  </div>
-                </div>
-                <div className="col-span-2 mt-2 overflow-y-auto p-2">
-                  {/* Dropdown for selecting a scheme */}
-                  <div className="mb-4">
-                    <label
-                      htmlFor="schemeSelect"
-                      className="text-sm block font-semibold text-gray-700 mb-1"
-                    >
-                      Transfer To Scheme
-                    </label>
-                    <select
-                      id="schemeSelect"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                      onChange={(e) => {
-                        const selectedScheme = schemesData?.data.find(
-                          (scheme) => scheme.funddes === e.target.value
-                        );
-                        setTofundPcode(selectedScheme?.pcode);
-                        setDestinationTitle(selectedScheme?.funddes);
-                      }}
-                    >
-                      <option value="" selected>
-                        Choose a scheme
-                      </option>
-                      {schemesData
-                        ? schemesData &&
-                          schemesData?.data?.map((scheme, index) => (
-                            <option key={index} value={scheme?.funddes}>
-                              {scheme?.funddes}
-                            </option>
-                          ))
-                        : "Loading..."}
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 lg:grid-cols-5">
-                <div className="col-span-1 mt-2 overflow-y-auto p-2">
-                  {/* Text input for scheme name */}
-                  <div className="mb-4">
-                    <label
-                      htmlFor="schemeName"
-                      className="text-sm block font-semibold text-gray-700 mb-1"
-                    >
-                      Initial Amount
-                    </label>
-                    <input
-                      type="number"
-                      id="schemeName"
-                      placeholder="Enter scheme name"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                      value={initialAmount}
-                      onChange={(e) => setInitialAmount(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="col-span-1 mt-2 overflow-y-auto p-2">
-                  {/* Text input for scheme name */}
-                  <div className="mb-4">
-                    <label
-                      htmlFor="schemeName"
-                      className="text-sm block font-semibold text-gray-700 mb-1"
-                    >
-                      Transfer Amount
-                    </label>
-                    <input
-                      type="number"
-                      id="schemeName"
-                      placeholder="Enter scheme name"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                      value={transferAmount}
-                      onChange={(e) => setTransferAmount(e.target.value)}
-                    />
-                  </div>
-                </div>
-                {/* Date input for selecting a date */}
-                <div className="col-span-1 mt-2 overflow-y-auto p-2">
-                  <div className="mb-4">
-                    <label
-                      htmlFor="schemeDate"
-                      className="text-sm block font-semibold text-gray-700 mb-1"
-                    >
-                      Investment Date
-                    </label>
-                    <input
-                      type="date"
-                      id="schemeDate"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                      min={endsipDate}
-                      max={getTodayDate()}
-                      value={valuationDate}
-                      onChange={(e) => setValuationDate(e.target.value)}
-                    />
-                  </div>
-                </div>
-                {/* Date input for selecting a date */}
-                <div className="col-span-1 mt-2 overflow-y-auto p-2">
-                  <div className="mb-4">
-                    <label
-                      htmlFor="schemeDate"
-                      className="text-sm block font-semibold text-gray-700 mb-1"
-                    >
-                      SWP Start Date
-                    </label>
-                    <input
-                      type="date"
-                      id="schemeDate"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                      value={startsipDate}
-                      onChange={(e) => setStartSipDate(e.target.value)}
-                    />
-                  </div>
-                </div>
-                {/* Date input for selecting a date */}
-                <div className="col-span-1 mt-2 overflow-y-auto p-2">
-                  <div className="mb-4">
-                    <label
-                      htmlFor="schemeDate"
-                      className="text-sm block font-semibold text-gray-700 mb-1"
-                    >
-                      SWP End Date
-                    </label>
-                    <input
-                      type="date"
-                      id="schemeDate"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                      min={startsipDate}
-                      value={endsipDate}
-                      onChange={(e) => setEndSipDate(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-              <Button className="bg-[var(--rv-secondary)] text-white disabled:opacity-50 hover:bg-[var(--rv-primary)]" onClick={() => haldleSubmit()}>
-                Show
-              </Button>
-            </div>
-          </div>
-          <div className="col-span-1">
-            {graphData && (
-              <div className="mb-5 flex justify-between">
-                <div className="space-x-2">
-                  <Button
-                    variant="outline"
-                    className={`border-2 ${
-                      viewby === "graph" ? "border-blue-600" : "border-gray-600"
-                    } uppercase font-semibold text-gray-800`}
-                    onClick={() => setViewBy("graph")}
-                  >
-                    Graph
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className={`border-2 ${
-                      viewby === "table" ? "border-blue-600" : "border-gray-600"
-                    } uppercase font-semibold text-gray-800`}
-                    onClick={() => setViewBy("table")}
-                  >
-                    Table
-                  </Button>
-                </div>
-                <div
-                  className="cursor-pointer"
-                  onClick={() =>
-                    handlePdf(
-                      result.resData,
-                      title,
-                      startsipDate,
-                      valuationDate
-                    )
-                  }
-                >
-                  <h1 className="text-2xl">
-                    <FaFilePdf />
-                  </h1>
-                </div>
-              </div>
-            )}
-            {graphData && (
-              <div>
-                <h1 className="text-center text-gray-700">Source Fund</h1>
-                <h1 className="text-center font-semibold text-gray-700 mb-3">
-                  {title}
-                </h1>
-                <div className="w-full flex overflow-y-auto mb-7">
-                  <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
-                    <h1 className="font-semibold text-gray-800 text-sm">
-                      Amount Invested
-                    </h1>
-                    <h1 className="font-medium text-gray-900 text-sm">
-                      {result?.withdrawlingScheme?.initialAmount}
-                    </h1>
-                  </div>
-                  <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
-                    <h1 className="font-semibold text-gray-800 text-sm">
-                      MONTHLY TRANSFER
-                    </h1>
-                    <h1 className="font-medium text-gray-900 text-sm">
-                      {transferAmount}
-                    </h1>
-                  </div>
-                  <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
-                    <h1 className="font-semibold text-gray-800 text-sm">
-                      TOTAL TRANSFER
-                    </h1>
-                    <h1 className="font-medium text-gray-900 text-sm">
-                      {result?.withdrawlingScheme?.totalWithdrawlAmount}
-                    </h1>
-                  </div>
-                  <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
-                    <h1 className="font-semibold text-gray-800 text-sm">
-                      SOURCE FUND BALANCE
-                    </h1>
-                    <h1 className="font-medium text-gray-900 text-sm">
-                      {result?.withdrawlingScheme?.fundRemaining}
-                    </h1>
-                  </div>
-                  <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
-                    <h1 className="font-semibold text-gray-800 text-sm">
-                      TRANSFERRED AMOUNT + BALANCE VALUE
-                    </h1>
-                    <h1 className="font-medium text-gray-900 text-sm">
-                      {result?.withdrawlingScheme?.portFolioValue}
-                    </h1>
-                  </div>
-                  <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
-                    <h1 className="font-semibold text-gray-800 text-sm">
-                      XIRR (%)
-                    </h1>
-                    <h1 className="font-medium text-gray-900 text-sm">
-                      {result?.withdrawlingScheme.xirrRate}
-                    </h1>
-                  </div>
-                </div>
-
-                <h1 className="text-center text-gray-700">Destination Fund</h1>
-                <h1 className="text-center font-semibold text-gray-700 mb-3">
-                  {destinationTitle}
-                </h1>
-                <div className="w-full flex overflow-y-auto mb-7">
-                  <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
-                    <h1 className="font-semibold text-gray-800 text-sm">
-                      INSTALLMENT AMOUNT
-                    </h1>
-                    <h1 className="font-medium text-gray-900 text-sm">
-                      {
-                        result?.investedScheme?.DestinationFundValuation
-                          ?.installmentAmount
-                      }
-                    </h1>
-                  </div>
-                  <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
-                    <h1 className="font-semibold text-gray-800 text-sm">
-                      AMOUNT TRANSFERRED FOR MONTH
-                    </h1>
-                    <h1 className="font-medium text-gray-900 text-sm">
-                      {
-                        result?.investedScheme?.DestinationFundValuation
-                          ?.amountTransferFormonth
-                      }
-                    </h1>
-                  </div>
-                  <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
-                    <h1 className="font-semibold text-gray-800 text-sm">
-                      AMOUNT INVESTED
-                    </h1>
-                    <h1 className="font-medium text-gray-900 text-sm">
-                      {
-                        result?.investedScheme?.DestinationFundValuation
-                          ?.amountInvested
-                      }
-                    </h1>
-                  </div>
-                  <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
-                    <h1 className="font-semibold text-gray-800 text-sm">
-                      VALUATION ON MATURITY
-                    </h1>
-                    <h1 className="font-medium text-gray-900 text-sm">
-                      {
-                        result?.investedScheme?.DestinationFundValuation
-                          ?.valuationAsOnMaturity
-                      }
-                    </h1>
-                  </div>
-                  <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
-                    <h1 className="font-semibold text-gray-800 text-sm">
-                      ABSOLUTE RETURN (%)
-                    </h1>
-                    <h1 className="font-medium text-gray-900 text-sm">
-                      {
-                        result?.investedScheme?.DestinationFundValuation
-                          ?.absoluteReturns
-                      }
-                    </h1>
-                  </div>
-                  <div className="py-2 px-3 border border-stone-600 shadow shadow-emerald-100 rounded-sm text-center">
-                    <h1 className="font-semibold text-gray-800 text-sm">
-                      XIRR (%)
-                    </h1>
-                    <h1 className="font-medium text-gray-900 text-sm">
-                      {
-                        result?.investedScheme?.DestinationFundValuation
-                          ?.xirrRate
-                      }
-                    </h1>
-                  </div>
-                </div>
-              </div>
-            )}
-            {result ? (
-              viewby === "graph" ? (
-                <div id="graphId">
-                  {graphData && (
-                    <StpPerformanceChart
-                      piedata={result}
-                      startDate={startsipDate}
-                      endDate={endsipDate}
-                      title={title}
-                      withdrawal={transferAmount}
-                    />
-                  )}
-                </div>
+                )
               ) : (
-                <div className="border border-gray-200 rounded-2xl p-5">
-                  <h1 className="text-center text-gray-700">Source Fund</h1>
-                  <h1 className="text-center font-semibold text-gray-700 mb-3">
-                    {title}
-                  </h1>
-                  {graphData && (
-                    <StpPerformanceTofundTable data={result} title={title} />
-                  )}
-                  <h1 className="text-center text-gray-700">
-                    Destination Fund
-                  </h1>
-                  <h1 className="text-center font-semibold text-gray-700 mb-3">
-                    {destinationTitle}
-                  </h1>
-                  {graphData && (
-                    <StpPerformanceFromfundTable data={result} title={title} />
-                  )}
-                </div>
-              )
-            ) : (
-              <div>No Data Found</div>
-            )}
+                <div>No Data Found</div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

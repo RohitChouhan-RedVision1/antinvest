@@ -64,7 +64,7 @@ export default function Page() {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto py-[30px] lg:py-[60px]">
+    <div className="max-w-screen-xl mx-auto main_section">
       <div className="">
         <div className="mb-5 flex flex-col md:flex-row gap-5 justify-between">
           <div className="">

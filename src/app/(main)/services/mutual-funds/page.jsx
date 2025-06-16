@@ -15,6 +15,7 @@ import { getServiceData, getSiteData } from "@/lib/functions";
 import { FaEnvelope, FaMapLocation, FaPhone } from "react-icons/fa6";
 import { FAQServices } from "@/components/landing/faqservices/faqservices";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { serviceFaqs } from "@/data/faqs";
 export const metadata = {
   title: "Mutual Funds",
   description:
@@ -24,7 +25,10 @@ export const metadata = {
 const MutualFunds = async () => {
   const services = await getServiceData();
   const sitedata = await getSiteData();
-  console.log(sitedata);
+  const faqs = serviceFaqs["mutualFunds"] || [];
+
+
+
   return (
     <div>
       <div className="flex bg-center bg-no-repeat bg-cover bg-[url('/images/pay-premium/pay-premium.webp')] bg-gray-500 overflow-hidden text-start justify-start items-center h-64">
@@ -111,7 +115,7 @@ const MutualFunds = async () => {
           <div className="md:col-span-2">
             <div className="rounded-xl overflow-hidden mb-6">
               <Image
-                src="/service/mutual-fund.jpg"
+                src="/service/mutual-funds-02.webp"
                 alt="Mutual Funds Investment"
                 width={800}
                 height={400}
@@ -120,59 +124,46 @@ const MutualFunds = async () => {
             </div>
 
             <h2 className="text-3xl font-bold  mb-4">
-              Empower Your Wealth with Smart Mutual Fund Investments
+              Grow Wealth Smartly with Expert Mutual Fund Investments
             </h2>
 
             <p className=" mb-4">
               <strong className="text-[--rv-primary] text-lg">M</strong>utual
-              Funds offer a powerful way to grow your wealth through
-              professional fund management, diversified portfolios, and
-              risk-balanced strategies. Whether you're a first-time investor or
-              a seasoned planner, mutual funds provide tailored options for all.
+              Funds are one of the most reliable ways to build long-term financial growth. At <strong> {sitedata.websiteName} </strong>, we simplify your investment journey by offering curated mutual fund portfolios aligned with your financial goals and risk profile.
             </p>
 
             <p className=" mb-4">
-              With access to equity, debt, hybrid, and tax-saving schemes,
-              mutual funds are designed to meet varied financial goals — from
-              short-term returns to long-term retirement planning. Start your
-              journey today with trusted AMC partners and expert advisors.
+              Whether you're starting small with SIPs or investing a lump sum for faster growth, our platform gives you access to top-performing funds, expert insights, and real-time tracking — all in one secure place.
+
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 mb-4">
               <div className="flex items-center gap-2 text-sm font-medium text-[rv-secondary)]">
                 <IoMdCheckmarkCircleOutline className="text-2xl text-green-600" />{" "}
-                SEBI-Regulated Funds
+                Handpicked Funds Backed by Research
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-[rv-secondary)]">
                 <IoMdCheckmarkCircleOutline className="text-2xl text-green-600" />{" "}
-                Expert Advisory & Portfolio Management
+                 SIP & Lump Sum Options Available
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-[rv-secondary)]">
                 <IoMdCheckmarkCircleOutline className="text-2xl text-green-600" />{" "}
-                Tax Benefits Under Section 80C
+                Real-Time Portfolio Tracking
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-[rv-secondary)]">
                 <IoMdCheckmarkCircleOutline className="text-2xl text-green-600" />{" "}
-                SIP & Lumpsum Investment Options
+                Aligned with Your Financial Goals
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-[rv-secondary)]">
                 <IoMdCheckmarkCircleOutline className="text-2xl text-green-600" />{" "}
-                High Liquidity & Easy Redemption
+                Risk-Based Fund Recommendations
               </div>
               <div className="flex items-center gap-2 text-sm font-medium text-[rv-secondary)]">
                 <IoMdCheckmarkCircleOutline className="text-2xl text-green-600" />{" "}
-                Professionally Managed by Fund Experts
-              </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-[rv-secondary)]">
-                <IoMdCheckmarkCircleOutline className="text-2xl text-green-600" />{" "}
-                Diversification to Minimize Risk
-              </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-[rv-secondary)]">
-                <IoMdCheckmarkCircleOutline className="text-2xl text-green-600" />{" "}
-                Suitable for All Financial Goals
+                Transparent, Paperless Process
               </div>
             </div>
-            <FAQServices />
+            <FAQServices faqs={faqs}/>
           </div>
         </div>
       </div>

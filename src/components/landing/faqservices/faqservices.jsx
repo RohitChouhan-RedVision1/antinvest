@@ -42,40 +42,7 @@ const childFade = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
 };
 
-export function FAQServices() {
-  const faqs = [
-    {
-      question: "Why should I choose Redvission to manage my investments?",
-      answer:
-        "At Redvission, we don’t just recommend products—we build portfolios aligned with your life goals...",
-    },
-    {
-      question: "Is my money safe if I invest through Redvission?",
-      answer:
-        "Absolutely. Your investments are held with SEBI-registered mutual funds...",
-    },
-    {
-      question: "Do I have to pay anything to get started?",
-      answer:
-        "No. We don’t charge you any upfront or advisory fees...",
-    },
-    {
-      question: "What kind of investors do you work with?",
-      answer:
-        "Whether you're just starting your investment journey or managing a multi-crore portfolio...",
-    },
-    {
-      question: "Will I get regular updates and personal support?",
-      answer:
-        "Yes! We provide timely portfolio reviews, performance insights...",
-    },
-    {
-      question: "I’ve already invested elsewhere. Can you still help?",
-      answer:
-        "Of course. We offer portfolio reviews and restructuring...",
-    },
-  ];
-
+export function FAQServices({faqs}) {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
@@ -83,7 +50,7 @@ export function FAQServices() {
         <h2 className="text-3xl font-bold  mb-4">
     Frequently Asked Questions
   </h2>
-            {faqs.map((faq, index) => (
+            {faqs?.map((faq, index) => (
         <motion.div
           key={index}
           className="mb-2 border border-white rounded-2xl overflow-hidden text-white group hover:text-[var(--rv-primary)]"
@@ -94,7 +61,7 @@ export function FAQServices() {
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
           >
             <span className="text-[16px] md:text-lg font-bold text-left break-words transition-colors group-hover:text-[var(--rv-primary)]">
-              {faq.question}
+              {faq?.question}
             </span>
             {openIndex === index ? (
               <MinusIcon className="w-5 h-5 transition-colors group-hover:text-[var(--rv-primary)]" />
@@ -104,7 +71,7 @@ export function FAQServices() {
           </button>
           {openIndex === index && (
             <div className="p-4 bg-[var(--rv-secondary)] text-white border-t">
-              {faq.answer}
+              {faq?.answer}
             </div>
           )}
         </motion.div>
